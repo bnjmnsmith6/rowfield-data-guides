@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Link preview API: get title, description and og:image for a list of URLs</title>
+<meta name="description" content="How to get link previews (title, description, og:image, Open Graph and Twitter card tags, favicon) for a list of URLs. Free options first: read the tags yourself or use a free API tier. Then a pay-per-preview tool where failed URLs are free.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/link-preview-api/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a></nav>
+</header>
+<main>
+<h1>Link preview API: title, description and og:image for a list of URLs</h1>
+<p class="lead">You have a list of links and want a preview card for each one: title, description, image, site name and icon. Here are the free ways to do it, and the tool we built for bulk lists.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+
+<h2>Free options first</h2>
+<ul>
+<li><strong>Read the tags yourself:</strong> link previews come from <code>&lt;meta&gt;</code> tags in the page's <code>&lt;head&gt;</code>. The <a href="https://ogp.me/">Open Graph protocol</a> names four required properties: <code>og:title</code>, <code>og:type</code>, <code>og:image</code> and <code>og:url</code>. Fetch the page and read those tags (plus <code>twitter:*</code> and the plain <code>&lt;title&gt;</code>). Fine for a few links, or if you already run your own server.</li>
+<li><strong>Open-source library:</strong> in Node.js, <a href="https://www.npmjs.com/package/open-graph-scraper">open-graph-scraper</a> (MIT license, on npm) reads Open Graph and Twitter card tags for you.</li>
+<li><strong>Free API tiers</strong> (read from each vendor's pricing page on 2026-11-02):
+<ul>
+<li><a href="https://microlink.io/pricing">Microlink</a> Free plan: 25 requests per day, no card, with a free API key.</li>
+<li><a href="https://www.opengraph.io/pricing">OpenGraph.io</a> Free plan: 100 requests, no credit card required.</li>
+<li><a href="https://www.linkpreview.net/">LinkPreview.net</a> Free plan: 60 requests per hour, personal use only.</li>
+</ul></li>
+</ul>
+<p>If one of these covers you, use it.</p>
+
+<h2>The gap this tool fills</h2>
+<p>The free paths stop at small volumes, need your own fetch code and server, or are for personal use only. The paid plans of those APIs are monthly subscriptions. Our tool is for a list of URLs you want to run now, with no subscription:</p>
+<ul>
+<li>Up to 5,000 URLs per run, one row per URL, exported as CSV, JSON or Excel or read through the API</li>
+<li>Pay only for previews that load; failed, blocked and non-HTML URLs are free status rows</li>
+<li>robots.txt read first for every host, one request at a time per host</li>
+<li>Works as an MCP tool for AI agents through Apify's MCP server</li>
+</ul>
+
+<h2>What you get per URL</h2>
+<p>Our <a href="https://apify.com/founder-experiment/link-preview-open-graph-api">Link Preview &amp; Open Graph API</a> on Apify returns:</p>
+<ul>
+<li><code>title</code>, <code>description</code></li>
+<li><code>ogTitle</code>, <code>ogDescription</code>, <code>ogImage</code> (absolute URL), <code>ogImageAlt</code>, <code>ogType</code>, <code>ogSiteName</code>, <code>ogUrl</code>, <code>ogLocale</code></li>
+<li><code>twitterCard</code>, <code>twitterTitle</code>, <code>twitterDescription</code>, <code>twitterImage</code>, <code>twitterSite</code></li>
+<li><code>favicon</code>, <code>canonical</code>, <code>lang</code>, <code>themeColor</code></li>
+<li><code>finalUrl</code>, <code>statusCode</code>, <code>redirectCount</code>, <code>contentType</code>, <code>fetchedAt</code>, and <code>error</code>/<code>message</code> for status rows</li>
+</ul>
+<p>Not collected: author tags, e-mail addresses, phone numbers or person names.</p>
+
+<h2>How to get previews for a list of URLs</h2>
+<ol>
+<li>Open the actor on Apify and paste your <code>urls</code>. A bare domain like <code>python.org</code> becomes <code>https://python.org/</code>.</li>
+<li>Optional: <code>maxUrls</code> caps the run and your cost (default 100, up to 5,000).</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+</ol>
+<p>Example input:</p>
+<pre>{"urls": ["https://www.python.org/", "https://github.com/"], "maxUrls": 100}</pre>
+<p>From an AI agent (MCP): <code>https://mcp.apify.com?tools=founder-experiment/link-preview-open-graph-api</code>. More client configs are in <a href="https://github.com/bnjmnsmith6/rowfield-data-mcp">github.com/bnjmnsmith6/rowfield-data-mcp</a>.</p>
+
+<h2>Price</h2>
+<p>Pay per result: $0.80 per 1,000 previews ($0.0008 per preview) plus $0.00005 per run start. Platform usage is included. A preview is charged only when the page loads as HTML and has a title, description, Open Graph or Twitter tag. These rows are free: invalid or private address, blocked by robots.txt, timeout or network error, HTTP 4xx or 5xx, not an HTML page, more than 3 redirects, or no title or meta tags at all.</p>
+<p>For comparison (vendor pricing pages, read 2026-11-02): OpenGraph.io Developer is $25 per month for 50,000 credits, then $1.00 per 1,000; Microlink Pro is $49 per month for 46,000 requests (about $1.07 per 1,000). If you send more than about 31,000 URLs every month, a monthly OpenGraph.io plan can cost less per URL than this tool. Prices change; check before you rely on them.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>No JavaScript rendering. It reads the HTML the server sends, so sites that add meta tags only with JavaScript may return fewer fields.</li>
+<li>Some sites block automated requests or disallow bots in robots.txt. Those URLs come back as free status rows.</li>
+<li>The og:image URL is returned as the page declares it (made absolute). The image is not downloaded or checked.</li>
+<li>Up to 5,000 URLs per run; split bigger lists into several runs.</li>
+<li>Not affiliated with or endorsed by Microlink, OpenGraph.io, LinkPreview.net or the Open Graph protocol project.</li>
+</ul>
+<p>Related: <a href="../clearbit-logo-api-alternative/">get a company logo from a domain</a> and <a href="../sitemap-to-csv/">sitemap to CSV</a> (to build the URL list first).</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/link-preview-open-graph-api">Open the Link Preview &amp; Open Graph API on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>
