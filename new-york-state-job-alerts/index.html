@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>New York State job alerts: a daily feed of new StateJobsNY vacancies</title>
+<meta name="description" content="Get only the new New York State government vacancies from StateJobsNY each day, filtered by title, agency, county or deadline, as CSV, Excel, JSON or API rows.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/new-york-state-job-alerts/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a></nav>
+</header>
+<main>
+<h1>New York State job alerts: a daily feed of new StateJobsNY vacancies</h1>
+<p class="lead">StateJobsNY lists New York State government vacancies in one public table. If you want to see only the vacancies that are new since yesterday, filtered to the titles, agencies or counties you care about, here is one way to do it.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>The gap</h2>
+<ul>
+<li>The StateJobsNY FAQ (read 2026-11-02) does not describe e-mail alerts or saved searches for new vacancies.</li>
+<li>So "what is new today" means opening the full table and scanning it by hand.</li>
+</ul>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/new-york-state-jobs-statejobsny">New York State Government Jobs Scraper (StateJobsNY)</a> on Apify reads the public StateJobsNY vacancy table ("Jobs Open to the General Public", statejobs.ny.gov) and returns one row per vacancy:</p>
+<ul>
+<li>Item number and title</li>
+<li>Salary grade, kept as shown (a grade number, <code>NS</code> or <code>Hourly</code>)</li>
+<li>Posted date and application deadline</li>
+<li>Agency and county</li>
+<li>A link to the vacancy page</li>
+</ul>
+<p>It does not open vacancy pages, so there is no duties, qualifications or salary text; open the link for those. No contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to get a daily list of new vacancies</h2>
+<ol>
+<li>Open the actor on Apify.</li>
+<li>Add filters: <code>keywords</code> (a word in the title starts with it, for example <code>analyst</code>), <code>excludeKeywords</code> (for example <code>temporary</code>), <code>agencies</code> (part of the name, for example <code>Health</code> or <code>Transportation</code>), <code>counties</code> (for example <code>Albany</code>), <code>postedWithinDays</code>, <code>deadlineWithinDays</code>.</li>
+<li>Turn on <code>onlyNew</code> and add a daily schedule. Each run then returns only vacancies earlier runs have not seen (the memory is a key-value store named <code>statejobsny-jobs-memory</code> in your own Apify account).</li>
+<li>Read the new rows as CSV, JSON or Excel, or through the API in your own sheet, script or app.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"keywords": ["analyst"]}
+
+{"keywords": ["engineer"], "agencies": ["Transportation"]}
+
+{"counties": ["Albany"], "onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.50 per 1,000 job postings ($0.0005 per posting) plus $0.00005 per run start. Platform usage is included. Postings removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the columns of the public table. Jobs open only to current state employees are not in that table and are not included.</li>
+<li>Values are kept as StateJobsNY shows them; county can be "To Be Determined".</li>
+<li>Reads robots.txt first; 2 requests per run, at least 2.5 seconds apart. The list is one page, so please run it at most once a day.</li>
+<li>Not made by or affiliated with the State of New York or the NYS Department of Civil Service.</li>
+</ul>
+<p>Need California, Wisconsin or North Dakota too? See the <a href="../state-government-jobs-feed/">US state government jobs feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/new-york-state-jobs-statejobsny">Open the StateJobsNY vacancies feed on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

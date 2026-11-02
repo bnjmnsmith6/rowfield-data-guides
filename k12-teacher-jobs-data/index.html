@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>K-12 teacher and school district job postings data: AppliTrack jobs from 50 districts as CSV</title>
+<meta name="description" content="Teacher, substitute, aide and other K-12 school job postings from 50 AppliTrack district portals in 36 states as one CSV, Excel or API feed. Same columns for every district, daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/k12-teacher-jobs-data/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a></nav>
+</header>
+<main>
+<h1>K-12 teacher and school district job postings data (AppliTrack)</h1>
+<p class="lead">Many US school districts post their jobs on AppliTrack, but each district has its own portal (<code>applitrack.com/&lt;district&gt;/</code>). If you need those postings across many districts as one dataset, for research, a job board or a staffing feed, here is how to get them.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>Why a cross-district export</h2>
+<ul>
+<li>Each AppliTrack portal lists only its own district's openings, with its own position types.</li>
+<li>Comparing districts, counting openings by role or feeding a job board means opening portal after portal.</li>
+<li>The export reads each portal's public job list and returns one row per posting, with the same columns for every district.</li>
+</ul>
+<p>The same postings stay public on each district's portal and on job-seeker sites. This is for people who need them as data.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/k12-school-district-jobs-applitrack">K-12 School &amp; Teacher Jobs (AppliTrack)</a> actor on Apify comes with a default list of 50 AppliTrack district portals that had job postings when checked on 2026-10-28, in 36 states. You can also add any district that uses a portal on <code>www.applitrack.com</code> or <code>phl.applitrack.com</code>.</p>
+<ul>
+<li>District, state, portal, and the member district on multi-district consortium portals</li>
+<li>Job title, position type, subcategory and school or location</li>
+<li>Posted date, date available and closing date (when the district shows them)</li>
+<li>Salary text, FTE and work days or months (only when the posting states them)</li>
+<li>A link to each posting on the district portal</li>
+</ul>
+<p>Not collected: job descriptions, attachments, contact names, e-mail addresses or phone numbers. Text fields are cleaned of any e-mail address or phone number.</p>
+
+<h2>How to export teacher and school jobs</h2>
+<ol>
+<li>Open the actor on Apify. The form is prefilled with 5 portals for a quick first run. Clear <code>districts</code> to scan the full default list, or paste your own portal names or URLs (max 50 per run).</li>
+<li>Filter if you want: <code>keywords</code> (for example <code>teach</code>, <code>substitute</code>, <code>paraprofessional</code>, <code>bus driver</code>), <code>states</code> (2-letter codes), <code>positionTypes</code>, <code>postedWithinDays</code>.</li>
+<li>For a low-cost sample of many districts, set <code>maxJobsPerDistrict</code> (for example 5).</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily feed, turn on <code>onlyNew</code> and add a schedule. Later runs return only postings your previous run with the same settings did not return.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"districts": [], "keywords": ["substitute"], "states": ["MI", "OH"]}
+
+{"districts": [], "keywords": ["paraprofessional", "paraeducator", "instructional aide"], "onlyNew": true}
+
+{"districts": ["https://www.applitrack.com/glastonbury/", "https://www.applitrack.com/orcsd/"], "maxJobsPerDistrict": 10}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.30 per 1,000 job postings ($0.0003 per posting) plus $0.00005 per run start. Platform usage is included. Error rows and postings skipped by <code>onlyNew</code> are not charged. Postings past <code>maxJobsPerDistrict</code> are not saved and not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only districts that post jobs on AppliTrack. Many districts use other hiring systems; those are not covered.</li>
+<li>Closing dates, start dates and subcategories appear only when the district shows them on its list. Each district names its own position types.</li>
+<li>One request per district, at least 2 seconds apart, robots.txt checked first. Posting detail pages are not opened.</li>
+<li>Not made by or affiliated with AppliTrack, PowerSchool or any school district.</li>
+</ul>
+<p>Need state government jobs instead? See the <a href="../state-government-jobs-feed/">US state government jobs feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/k12-school-district-jobs-applitrack">Open the K-12 school jobs export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

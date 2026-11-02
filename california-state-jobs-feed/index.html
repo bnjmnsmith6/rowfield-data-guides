@@ -5,20 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
-<title>California state jobs feed: CalCareers postings as CSV, JSON or API</title>
-<meta name="description" content="Get California state government job postings from CalCareers as a feed: title, classification, department, location, telework, salary, dates, link. Filters and daily only-new mode.">
+<title>California state jobs data export: CalCareers postings as CSV, Excel or API</title>
+<meta name="description" content="Export California state government job postings from CalCareers in bulk: title, classification, department, location, telework, salary, dates, link. CSV, Excel, JSON or API.">
 <link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/california-state-jobs-feed/">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 <header>
 <a class="brand" href="../">Rowfield Data guides</a>
-<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a></nav>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a></nav>
 </header>
 <main>
-<h1>California state jobs feed (CalCareers)</h1>
-<p class="lead">California posts its state government jobs on CalCareers. If you want those postings as rows for alerts, a job board, a newsletter or research, here is how to get a feed.</p>
+<h1>California state jobs data export (CalCareers)</h1>
+<p class="lead">California posts its state government jobs on CalCareers. If you need those postings as data, in bulk, for a job board, a newsletter, a dashboard or research, here is how to get them as rows.</p>
 <p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<p><strong>Only want e-mails about new jobs?</strong> You do not need this tool. CalCareers has free Saved Searches: log in to your CalCareer account, run a search, click Save Search and pick how often to be notified.</p>
+<h2>Why export</h2>
+<ul>
+<li>We found no documented public job-search API and no bulk download on CalCareers (checked 2026-11-02). The search runs in the browser, one result page at a time.</li>
+<li>The export gives every posting as one row with the same columns, ready for a spreadsheet, a database or an API call.</li>
+</ul>
 <h2>What you get</h2>
 <p>Our <a href="https://apify.com/founder-experiment/california-state-jobs-calcareers">California State Government Jobs Scraper (CalCareers)</a> on Apify reads the public CalCareers job search result pages (calcareers.ca.gov), newest postings first, and returns one row per posting:</p>
 <ul>
@@ -30,13 +36,13 @@
 </ul>
 <p>No contact names, e-mail addresses or phone numbers. It does not open individual posting pages, so there is no duties or requirements text; open the link for those.</p>
 
-<h2>How to set up a daily feed</h2>
+<h2>How to export postings</h2>
 <ol>
 <li>Open the actor on Apify.</li>
 <li>Add filters if you want: <code>keywords</code> (a word in the working title or classification starts with it, for example <code>analyst</code>), <code>departments</code> (for example <code>Transportation</code>), <code>locations</code> (for example <code>Sacramento</code>), <code>telework</code>, <code>minSalary</code>, <code>postedWithinDays</code>.</li>
 <li>Set <code>maxPages</code>: result pages of 100 postings, newest first (1 to 30; 30 covers the full list). Filters are applied after reading, so a low <code>maxPages</code> only sees the newest postings.</li>
-<li>Turn on <code>onlyNew</code> and add a daily schedule. Later runs return only postings you have not seen before (the memory is a key-value store named <code>calcareers-jobs-memory</code> in your own Apify account).</li>
-<li>Export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>To keep a dataset current, turn on <code>onlyNew</code> and add a daily schedule. Later runs return only postings you have not seen before (the memory is a key-value store named <code>calcareers-jobs-memory</code> in your own Apify account).</li>
 </ol>
 <p>Example inputs:</p>
 <pre>{"keywords": ["analyst"], "maxPages": 3}
@@ -55,8 +61,8 @@
 <li>Reads robots.txt first, one request at a time at least 3 seconds apart. Please run it at most once a day.</li>
 <li>Not made by or affiliated with the State of California or CalHR.</li>
 </ul>
-<p>Need New York, Wisconsin or North Dakota too? See the <a href="../state-government-jobs-feed/">US state government jobs feed</a>.</p>
-<p><a class="cta" href="https://apify.com/founder-experiment/california-state-jobs-calcareers">Open the CalCareers jobs feed on Apify</a></p>
+<p>Need New York, Wisconsin or North Dakota too? See the <a href="../state-government-jobs-feed/">US state government jobs feed</a> or the <a href="../new-york-state-job-alerts/">New York State vacancies feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/california-state-jobs-calcareers">Open the CalCareers jobs export on Apify</a></p>
 
 </main>
 <footer>
