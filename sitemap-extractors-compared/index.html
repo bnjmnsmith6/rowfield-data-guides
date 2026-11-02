@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Sitemap extractors on Apify compared: price per 1,000 URLs (checked 2026-11-02)</title>
+<meta name="description" content="Five Apify actors that extract every URL from a website&#x27;s sitemaps, compared by price per 1,000 URLs, input and features. Prices read from the Apify Store on 2026-11-02. Free options first.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap-extractors-compared/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a></nav>
+</header>
+<main>
+<h1>Sitemap extractors on Apify compared</h1>
+<p class="lead">You want every URL a website lists in its sitemaps, as a CSV or API rows. Here are the free options and five Apify actors that do it, with prices read from each actor's public Apify Store pricing on <strong>2026-11-02</strong>.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<p>One of the five is ours: <strong>Sitemap URL Extractor</strong> by Rowfield Data, built and operated with an AI agent. We list it with the same facts as the others. Prices change; check each Store page before you rely on them.</p>
+
+<h2>Free options first</h2>
+<ul>
+<li><strong>Do it by hand:</strong> open <code>https://the-site.com/robots.txt</code>, find the <code>Sitemap:</code> lines (or try <code>/sitemap.xml</code>), and open the sitemap in your browser. Fine for one small site.</li>
+<li><strong>Our free paste-in tool:</strong> <a href="../sitemap-to-csv/">Sitemap to CSV</a> turns pasted sitemap XML into a URL list and a CSV download, in your browser. It does not fetch sitemaps or follow indexes for you.</li>
+<li><strong>No actor fee on Apify:</strong> <a href="https://apify.com/boxbox10/sitemap-extractor">boxbox10/sitemap-extractor</a> has no per-result price on its Store page ("Pay per usage"): you pay only Apify platform usage for the run.</li>
+</ul>
+
+<h2>Price per 1,000 URLs (checked 2026-11-02)</h2>
+<div class="scroll"><table>
+<thead><tr><th>Actor</th><th>Apify Free plan</th><th>Lowest listed price (paid plans)</th><th>Other charges</th></tr></thead>
+<tbody>
+<tr><td><a href="https://apify.com/boxbox10/sitemap-extractor">boxbox10/sitemap-extractor</a></td><td>No actor fee</td><td>No actor fee</td><td>Apify platform usage</td></tr>
+<tr><td><a href="https://apify.com/founder-experiment/sitemap-url-extractor">founder-experiment/sitemap-url-extractor</a> (ours)</td><td>$0.25</td><td>$0.25 (same on every plan)</td><td>$0.00005 per run start; platform usage included; status rows free</td></tr>
+<tr><td><a href="https://apify.com/apify/sitemap-extractor">apify/sitemap-extractor</a></td><td>$0.50</td><td>$0.10 (Gold plan and up)</td><td>None listed</td></tr>
+<tr><td><a href="https://apify.com/logiover/sitemap-to-url-crawler">logiover/sitemap-to-url-crawler</a></td><td>$1.50</td><td>$0.50 (Gold plan and up)</td><td>None listed</td></tr>
+<tr><td><a href="https://apify.com/onescales/sitemap-url-extractor">onescales/sitemap-url-extractor</a></td><td>$30.00</td><td>$1.00 (Gold plan and up)</td><td>$0.00005 per run start</td></tr>
+</tbody></table></div>
+<p>Source: each actor's pricing as published by Apify (public actor API and Store page), read 2026-11-02 between 16:21 and 16:23 US Central time. "Lowest listed price" is the Store page's "from" price.</p>
+<p><strong>Plain reading:</strong> on the Apify Free plan, ours is the lowest per-result price of the four that charge per result. On Apify's Gold plan and above, apify/sitemap-extractor is lower ($0.10 vs our $0.25).</p>
+
+<h2>What each one does differently</h2>
+<ul>
+<li><strong>apify/sitemap-extractor</strong> (by Apify): extracts URLs from a site's sitemaps and also checks each URL's HTTP status code. Pick it if you need live/dead status for every URL.</li>
+<li><strong>boxbox10/sitemap-extractor</strong>: give it a website; it finds sitemap.xml, robots.txt <code>Sitemap:</code> lines and nested sitemap indexes and returns loc, lastmod, changefreq and priority per URL.</li>
+<li><strong>logiover/sitemap-to-url-crawler</strong>: extracts all URLs from a sitemap.xml recursively, exported as CSV or JSON.</li>
+<li><strong>onescales/sitemap-url-extractor</strong>: give it a sitemap.xml link; it lists every URL in it plus the other sitemap fields.</li>
+<li><strong>founder-experiment/sitemap-url-extractor</strong> (ours): give it domains or sitemap URLs; it reads robots.txt first, follows sitemap indexes up to 5 levels, reads <code>.gz</code> and plain-text sitemaps, returns one de-duplicated row per URL, and has path-regex and <code>lastmodAfter</code> filters. It does not open the listed pages, so no status codes. Domains with no sitemap or a blocking robots.txt get one free status row.</li>
+</ul>
+<p>Descriptions above are summarised from each actor's own Store description on 2026-11-02. We did not run the other actors.</p>
+
+<h2>How to choose</h2>
+<ul>
+<li>One small site: do it by hand or use the free paste-in tool.</li>
+<li>You need HTTP status codes: apify/sitemap-extractor.</li>
+<li>You do not want a per-result fee: boxbox10/sitemap-extractor (you pay platform usage).</li>
+<li>You want one flat per-URL price with filters and free status rows: our Sitemap URL Extractor.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/sitemap-url-extractor">Open our Sitemap URL Extractor on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

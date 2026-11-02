@@ -15,5 +15,6 @@ https://bnjmnsmith6.github.io/rowfield-data-guides/
 - `city-county-bids-civicplus/`: city and county bids and RFPs from CivicPlus sites
 - `nvd-cve-to-csv/`: NVD CVEs to CSV with CVSS, CWE and CISA KEV flag
 - `saashub-alternatives-export/`: SaaSHub alternatives export
+- `sitemap-extractors-compared/`: sitemap extractors on Apify compared (dated prices)
 
 Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.
