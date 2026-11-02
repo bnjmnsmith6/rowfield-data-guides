@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>US state government jobs feed: California, New York, Wisconsin, North Dakota</title>
+<meta name="description" content="One feed of public state government job postings from California, New York, Wisconsin and North Dakota: one row shape, CSV/JSON/API, daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/state-government-jobs-feed/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a></nav>
+</header>
+<main>
+<h1>US state government jobs feed</h1>
+<p class="lead">Each state runs its own hiring site with its own layout. If you want state civil service jobs in one list, for alerts, a job board, a newsletter or research, here is one way to get a single feed.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>What the feed covers</h2>
+<p>Our <a href="https://apify.com/founder-experiment/us-state-government-jobs">US State Government Jobs Scraper</a> on Apify reads the public job lists of four states and returns one common row shape with a <code>state</code> field:</p>
+<ul>
+<li><strong>California:</strong> CalCareers job search results.</li>
+<li><strong>New York:</strong> StateJobsNY public vacancy table.</li>
+<li><strong>Wisconsin:</strong> Wisc.Jobs public job list.</li>
+<li><strong>North Dakota:</strong> Team ND Careers, Career Openings list.</li>
+</ul>
+<p>It reads listing pages only, never job detail pages. It is not made by, affiliated with or endorsed by any of these states.</p>
+
+<h2>What you get for each job</h2>
+<p>State, stable <code>jobId</code>, title, classification, agency, location, posted date, closing date, a link to the posting and the source line. Some fields exist only for some states:</p>
+<ul>
+<li>California: working title and class title, work type, telework, salary text and min/max (as shown, not converted).</li>
+<li>New York: salary grade, county as location.</li>
+<li>Wisconsin: job category, job code title.</li>
+<li>North Dakota: no posted date on the list.</li>
+</ul>
+<p>No description text, contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to get a daily feed of new postings</h2>
+<ol>
+<li>Open the actor on Apify and pick states with <code>states</code> (<code>CA</code>, <code>NY</code>, <code>WI</code>, <code>ND</code>; default all four).</li>
+<li>Add filters if you want: <code>titleKeywords</code> (for example <code>nurse</code>), <code>agencies</code>, <code>locations</code>, <code>closingWithinDays</code>, <code>postedWithinDays</code>.</li>
+<li>Turn on <code>onlyNew</code> and add a daily schedule. Later runs return and charge only postings you have not seen before (it remembers up to 80,000 job ids in a key-value store in your own Apify account).</li>
+<li>Export as CSV, JSON or Excel, or read the dataset through the API.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"titleKeywords": ["nurse"]}
+
+{"states": ["NY", "WI"], "maxItemsPerState": 50, "closingWithinDays": 14}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.00 per 1,000 jobs ($0.001 per job) plus $0.00005 per run start. Jobs removed by your filters, cut by your caps or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the facts on each public list. Agency names, locations and salary units are not standardised across states.</li>
+<li>California salary text shows no unit; values are not converted.</li>
+<li>If one state fails (error, robots.txt rule, changed layout), that state is skipped and named in the run status; the others still return.</li>
+<li>Please run it at most once a day.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/us-state-government-jobs">Open the state jobs feed on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

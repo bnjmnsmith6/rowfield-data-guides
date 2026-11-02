@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Sitemap to CSV: extract every URL from a sitemap.xml (free paste-in tool)</title>
+<meta name="description" content="Paste a sitemap.xml or sitemap index and get every URL with lastmod as a list and a CSV download. Runs in your browser; nothing is uploaded.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap-to-csv/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a></nav>
+</header>
+<main>
+<h1>Sitemap to CSV: extract every URL from a sitemap.xml</h1>
+<p class="lead">Paste the XML of a sitemap (or a sitemap index) below. You get the list of URLs with <code>lastmod</code>, <code>changefreq</code> and <code>priority</code>, and a CSV download.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<section class="tool" aria-label="Sitemap to CSV tool">
+<p><strong>Runs in your browser.</strong> This page does not fetch anything and does not upload what you paste.</p>
+<label for="xml">Sitemap XML (urlset, sitemapindex, or one URL per line)</label>
+<textarea id="xml" spellcheck="false" placeholder="&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+  &lt;url&gt;&lt;loc&gt;https://example.com/&lt;/loc&gt;&lt;lastmod&gt;2026-10-01&lt;/lastmod&gt;&lt;/url&gt;
+&lt;/urlset&gt;"></textarea>
+<div class="row">
+<button id="parse" type="button">Get URLs</button>
+<button id="download" type="button" class="secondary" disabled>Download CSV</button>
+<button id="copy" type="button" class="secondary" disabled>Copy URLs</button>
+<label>or open a file: <input id="file" type="file" accept=".xml,.txt,text/xml,text/plain"></label>
+</div>
+<p id="status" role="status" aria-live="polite"></p>
+<div class="scroll"><table><thead id="head"></thead><tbody id="rows"></tbody></table></div>
+</section>
+
+<h2>How to get the sitemap XML</h2>
+<ol>
+<li>Open <code>https://the-site.com/robots.txt</code> and look for <code>Sitemap:</code> lines. If there are none, try <code>/sitemap.xml</code> or <code>/sitemap_index.xml</code>.</li>
+<li>Open the sitemap URL in your browser, view the source, select all and copy.</li>
+<li>Paste it above and press <strong>Get URLs</strong>.</li>
+</ol>
+<p>If you paste a <strong>sitemap index</strong> (<code>&lt;sitemapindex&gt;</code>), you get the list of child sitemaps with their <code>lastmod</code>. Open each child sitemap and paste it in turn.</p>
+
+<h2>What this free tool does not do</h2>
+<ul>
+<li>It does not download sitemaps for you, follow indexes, or read <code>.gz</code> files. Browsers block most cross-site downloads, and this page makes no network requests on purpose.</li>
+<li>It does not visit the pages in the sitemap.</li>
+</ul>
+
+<h2>For whole sites, many domains or a schedule: Sitemap URL Extractor</h2>
+<p>Our <a href="https://apify.com/founder-experiment/sitemap-url-extractor">Sitemap URL Extractor &amp; Scraper</a> on Apify does the fetching for you. Give it domains; it finds their sitemaps in robots.txt, reads sitemap indexes (nested up to 5 levels), gzipped (<code>.gz</code>) and plain-text sitemaps, and returns one de-duplicated row per URL with <code>lastmod</code>, <code>changefreq</code>, <code>priority</code>, the source sitemap and the domain. Export as CSV, JSON or Excel, or use the API.</p>
+<ul>
+<li><strong>Filters:</strong> include or exclude by path regex (for example only <code>^/blog/</code>), keep URLs changed on or after a date (<code>lastmodAfter</code>), cap URLs per domain and per run.</li>
+<li><strong>Price:</strong> pay per result, $0.25 per 1,000 URLs ($0.00025 per URL) plus $0.00005 per run start. Status rows (no sitemap found, robots blocked, no matching URLs) and URLs removed by your filters are not charged.</li>
+<li><strong>Polite:</strong> reads robots.txt first, requests at least 1 second apart per host, no cookies, no proxy, no logins.</li>
+</ul>
+<p>Example input:</p>
+<pre>{"domains": ["www.example.com"], "includePathRegex": "^/blog/", "lastmodAfter": "2026-10-01", "maxItems": 1000}</pre>
+<p><a class="cta" href="https://apify.com/founder-experiment/sitemap-url-extractor">Open Sitemap URL Extractor on Apify</a></p>
+
+<h2>FAQ</h2>
+<p><strong>Why fewer URLs than the site has?</strong> A sitemap is the site's own list. Some sites leave pages out of their sitemaps, so neither this page nor the actor can see those pages.</p>
+<p><strong>Is my sitemap uploaded anywhere?</strong> No. The parsing runs in JavaScript on this page, and the page's security policy blocks network requests. The <a href="https://github.com/bnjmnsmith6/rowfield-data-guides/blob/main/assets/sitemap-parser.js">parser source</a> is public.</p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+<script src="../assets/sitemap-parser.js"></script>
+<script src="../assets/sitemap-tool.js"></script>
+</body>
+</html>

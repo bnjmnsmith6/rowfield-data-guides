@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap.xml

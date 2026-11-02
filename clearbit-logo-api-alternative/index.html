@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Clearbit Logo API alternative: get a company logo from a domain</title>
+<meta name="description" content="Get a company logo from a domain in bulk: best logo URL, square icon, favicons and app icons, site name and theme color. No API key from a logo vendor.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/clearbit-logo-api-alternative/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a></nav>
+</header>
+<main>
+<h1>Clearbit Logo API alternative: get a company logo from a domain</h1>
+<p class="lead">You have a list of company domains and need a logo for each one. Here is a keyless way to get it in bulk.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>Why people look for an alternative</h2>
+<p>The free Clearbit Logo API (<code>logo.clearbit.com/&lt;domain&gt;</code>) shut down on December 8, 2025. Lists, CRMs and dashboards that built image URLs from it need another source.</p>
+
+<h2>How to get logos from a list of domains</h2>
+<ol>
+<li>Open <a href="https://apify.com/founder-experiment/website-logo-extractor">Company Logo &amp; Favicon: Clearbit Logo Alternative</a> on Apify.</li>
+<li>Paste your domains into <strong>Domains or URLs</strong>, for example <code>python.org</code>, <code>apify.com</code>. Duplicates and www/bare variants are merged.</li>
+<li>Run. Each site takes a few seconds.</li>
+<li>Export as CSV, JSON or Excel, or call the dataset API from your CRM or script. Use <code>bestLogoUrl</code> where you used the Clearbit URL, or <code>bestIconUrl</code> for small square avatars.</li>
+</ol>
+<p>Example input:</p>
+<pre>{"domains": ["python.org", "apify.com"], "verifyLogo": true, "readManifest": true, "statusRows": true}</pre>
+
+<h2>What you get per site</h2>
+<table>
+<thead><tr><th>Field</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td><code>bestLogoUrl</code>, <code>bestLogoSource</code></td><td>The picked logo, in this order: JSON-LD Organization logo, a header logo image (footer images and logos linking to other sites are skipped), the largest app icon, og:image, favicon.</td></tr>
+<tr><td><code>bestLogoVerified</code></td><td>The logo URL was fetched once and returned an image.</td></tr>
+<tr><td><code>bestIconUrl</code></td><td>SVG icon or the largest square icon, good for avatars and lists.</td></tr>
+<tr><td><code>icons</code></td><td>Every declared icon (rel=icon, apple-touch-icon, mask-icon, manifest icons) with sizes and type.</td></tr>
+<tr><td><code>siteName</code>, <code>pageTitle</code>, <code>themeColor</code>, <code>finalUrl</code></td><td>Site name, page title, brand theme color and the resolved site URL.</td></tr>
+</tbody>
+</table>
+
+<h2>Price</h2>
+<p>Pay per result: $0.80 per 1,000 site results ($0.0008 per site with a logo or icon found) plus $0.00005 per run start. Sites that are blocked by robots.txt, redirect to another site, fail to load or have no logo get a free status row.</p>
+
+<h2>How it reads sites</h2>
+<ul>
+<li>Reads robots.txt first and obeys it.</li>
+<li>Reads only the home page, the site's manifest file (optional) and one check of the chosen logo (optional): about 3 to 5 requests per site.</li>
+<li>At least 1 second between requests to the same host, or the site's Crawl-delay. No cookies, no login, no JavaScript rendering.</li>
+</ul>
+
+<h2>Limits</h2>
+<ul>
+<li>Sites that build their head tags with JavaScript only may show fewer icons.</li>
+<li>og:image is often a social banner, not a logo, so it ranks low in the pick.</li>
+<li>Logos are trademarks of their owners. The tool returns the public URLs that sites publish; check your own use rights.</li>
+<li>No e-mails, phone numbers or person names are collected.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/website-logo-extractor">Open the logo extractor on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>
