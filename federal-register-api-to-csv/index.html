@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Federal Register API to CSV: new rules, notices and comment deadlines as rows</title>
+<meta name="description" content="Export new US Federal Register documents from the FederalRegister.gov API to CSV, JSON or Excel: rules, proposed rules, notices, agencies, dockets, CFR parts, comment deadlines.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/federal-register-api-to-csv/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a></nav>
+</header>
+<main>
+<h1>Federal Register API to CSV</h1>
+<p class="lead">You want new Federal Register rules and notices in a spreadsheet, a database or an AI workflow, one row per document, without writing the API paging yourself.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/federal-register-documents-scraper">Federal Register Documents Scraper</a> on Apify reads the public FederalRegister.gov API (no key) and returns one row per document: <strong>rules, proposed rules, notices and presidential documents</strong>.</p>
+<ul>
+<li>Document number, type, action, title, abstract and DATES text</li>
+<li>Publication date, effective date and <strong>comment deadline</strong></li>
+<li>Agencies, FR citation and pages</li>
+<li><strong>Docket ids</strong>, RINs and <strong>CFR parts</strong> affected, topics, the significant flag</li>
+<li>Links to the FederalRegister.gov page, the official PDF on govinfo.gov and the Regulations.gov comment page</li>
+</ul>
+<p>Metadata only, no full text. Agency contact persons are not collected.</p>
+
+<h2>How to get a CSV of new documents</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"daysBack": 3, "maxItems": 20}</code> returns up to 20 of the newest documents.</li>
+<li>Narrow it if you want: <code>documentTypes</code> (<code>RULE</code>, <code>PRORULE</code>, <code>NOTICE</code>, <code>PRESDOCU</code>), <code>agencies</code> (FederalRegister.gov agency slugs such as <code>environmental-protection-agency</code>), <code>keyword</code>, <code>docketId</code>, <code>significantOnly</code>, or a fixed <code>startDate</code>/<code>endDate</code>.</li>
+<li>Run, then export the dataset as CSV, JSON or Excel, or read it through the API.</li>
+<li>For a daily feed, turn on <code>onlyNew</code> and add a schedule. Later runs return and charge only documents you have not seen before. Use <code>stateKey</code> to keep a separate memory per saved search.</li>
+</ol>
+<p>Example input (new EPA rules and proposed rules, daily):</p>
+<pre>{"daysBack": 1, "documentTypes": ["RULE", "PRORULE"], "agencies": ["environmental-protection-agency"], "onlyNew": true, "maxItems": 100}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.50 per 1,000 documents ($0.0015 per document) plus $0.00005 per run start. Status rows (nothing matched, API failed) are free. <code>maxItems</code> caps the run and your cost.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>FederalRegister.gov is an unofficial rendition and does not provide legal notice. Each row links the official PDF on govinfo.gov; verify there for legal work.</li>
+<li>The API pages only the first 2,000 results of a search. Larger windows get a free <code>truncated</code> row; split the dates.</li>
+<li>Empty abstract, dates, docket or CFR fields are left empty, never guessed.</li>
+<li>Uses only the API, never the website's HTML pages. Reads robots.txt first, one request at a time, at least 1.5 seconds apart.</li>
+<li>Not affiliated with or endorsed by the Office of the Federal Register, NARA or GPO.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/federal-register-documents-scraper">Open the Federal Register scraper on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

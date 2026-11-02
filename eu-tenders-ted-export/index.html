@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>EU tenders: TED data export to CSV, JSON or Excel</title>
+<meta name="description" content="Export new EU calls for tender from TED (Tenders Electronic Daily): notice number, title, buyer, country, CPV codes, publication date, links. Country and CPV filters, daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/eu-tenders-ted-export/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a></nav>
+</header>
+<main>
+<h1>EU tenders: TED data export</h1>
+<p class="lead">You want new EU public procurement calls for tender from TED (Tenders Electronic Daily) as rows you can filter, share or load into a CRM, with no TED account or API key.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/eu-ted-tenders-scraper">EU TED Tenders Scraper: Calls for Tender</a> on Apify reads the public TED Search API (api.ted.europa.eu) and returns one row per call-for-tender notice, newest first:</p>
+<ul>
+<li>Notice number (<code>publicationNumber</code>) and notice type</li>
+<li>Title (in English when TED has an English version, otherwise the original language; <code>titleLanguage</code> says which)</li>
+<li>Buyer organisation names and buyer countries</li>
+<li>CPV codes and main CPV, publication date</li>
+<li>Links to the notice page, XML and PDF, plus a source credit line</li>
+</ul>
+<p>Calls for tender only: standard contract notices, social and other specific services notices, and design contest notices. Award notices, prior information notices and corrections are not returned.</p>
+
+<h2>How to export tenders</h2>
+<ol>
+<li>Open the actor on Apify.</li>
+<li>Set <code>daysBack</code> (default 3), and optionally <code>countries</code> (ISO alpha-3 codes such as <code>DEU</code>, <code>FRA</code>, <code>POL</code>) and <code>cpvPrefixes</code> (2 to 8 digits, for example <code>72</code> for IT services or <code>45</code> for construction).</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily tender feed, turn on <code>onlyNew</code>, set a fixed <code>stateKey</code> and add a schedule. Each run then returns only notices earlier runs did not return.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"daysBack": 7, "countries": ["DEU", "FRA"], "cpvPrefixes": ["72"]}
+
+{"daysBack": 2, "cpvPrefixes": ["45"], "onlyNew": true, "stateKey": "construction-daily"}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.50 per 1,000 calls for tender ($0.0015 per notice) plus $0.00005 per run start. Status rows (no results, nothing new, service error) are free. <code>maxItems</code> caps rows and cost.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Core search fields only. Deadlines, lot details and full descriptions are in the linked notice XML or PDF.</li>
+<li>Up to 15,000 notices per run. Use a shorter window or filters for wider searches.</li>
+<li>No contact fields. Any e-mail or phone text inside a title is removed.</li>
+<li>Source: TED, Publications Office of the European Union. Notices may be reused under the European Commission reuse policy (Commission Decision 2011/833/EU). Not affiliated with or endorsed by the Publications Office, and it does not use the TED logo.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/eu-ted-tenders-scraper">Open the EU TED tenders scraper on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>
