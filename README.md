@@ -12,5 +12,8 @@ https://bnjmnsmith6.github.io/rowfield-data-guides/
 - `k12-teacher-jobs-data/`: K-12 teacher and school district jobs data (AppliTrack)
 - `new-york-state-job-alerts/`: New York State job alerts, daily feed of new StateJobsNY vacancies
 - `sitemap-to-excel/`: sitemap to Excel (same free paste-in tool)
+- `city-county-bids-civicplus/`: city and county bids and RFPs from CivicPlus sites
+- `nvd-cve-to-csv/`: NVD CVEs to CSV with CVSS, CWE and CISA KEV flag
+- `saashub-alternatives-export/`: SaaSHub alternatives export
 
 Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.

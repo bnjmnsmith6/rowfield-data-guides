@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>City and county bids and RFPs: export CivicPlus Bid Postings to CSV</title>
+<meta name="description" content="Open bids, RFPs and RFQs from the Bid Postings (Bids.aspx) pages of many CivicPlus city and county websites in one CSV, Excel, JSON or API feed: agency, state, bid number, title, deadline, link.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/city-county-bids-civicplus/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a></nav>
+</header>
+<main>
+<h1>City and county bids and RFPs from CivicPlus sites as one CSV</h1>
+<p class="lead">Many US cities and counties run their website on CivicPlus (CivicEngage) and list open bids on a Bid Postings page, usually at <code>/Bids.aspx</code>. Each site lists only its own bids. If you need open bids from many of these boards in one list, for bid research, a lead list or a daily check, here is how to get them as rows.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<p><strong>Only watching a few agencies?</strong> You do not need this tool. Most CivicPlus sites have a free Notify Me page (usually <code>/list.aspx</code>) where you can sign up for e-mail or text alerts on that site's Bid Postings lists. You sign up once per site.</p>
+<h2>Why one export across boards</h2>
+<ul>
+<li>Every board is a separate website. Checking many boards means opening them one by one, or one Notify Me sign-up per site.</li>
+<li>The export reads each board's public Bid Postings page and returns one row per open bid, with the same columns for every agency.</li>
+<li>Local boards like these are not in the federal SAM.gov feed.</li>
+</ul>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/civicplus-bid-postings">Government Bids Scraper: City &amp; County RFPs (CivicPlus)</a> on Apify comes with a built-in default list of CivicPlus city and county boards (the current count and the agencies by state are on the Store page). You can also add any other CivicPlus site by its base URL, up to 300 per run. One row per open bid:</p>
+<ul>
+<li>Agency, state and agency site</li>
+<li>Bid number (the agency's own, when shown), title and the short summary shown on the board</li>
+<li>Status, closing time as shown and as a date-time in the agency's local time, and whether the bid is still current</li>
+<li>A link to the posting, where the documents are</li>
+</ul>
+<p>Optional <code>includeDetails</code> also opens each matching bid's page and adds category, description, publication date, bid opening info, addendum date and a list of related documents (name and link).</p>
+<p>No contact names, e-mail addresses or phone numbers. Text fields are cleaned of e-mail addresses, phone numbers and names after a "Contact" or "Attn" label.</p>
+
+<h2>How to export open bids</h2>
+<ol>
+<li>Open the actor on Apify. The form is prefilled with 6 sample boards for a quick first run. Clear <code>sites</code> to scan the full default list, or paste your own CivicPlus base URLs.</li>
+<li>Filter if you want: <code>keywords</code> (matches the start of a word in the title or summary, so <code>roof</code> finds roofing; for example <code>paving</code>, <code>HVAC</code>, <code>engineering</code>), <code>states</code> (for example <code>AR</code>, <code>OK</code>), <code>closingWithinDays</code>, <code>requireDeadline</code> (drop "Upon Contract" rows with no date).</li>
+<li>Set <code>maxItems</code> to cap the run and your cost.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list of new bids, turn on <code>onlyNew</code> and add a schedule. Bids already returned for the same sites and filters are skipped and not charged.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"sites": [], "keywords": ["paving", "roofing"], "states": ["AR", "OK"], "closingWithinDays": 14}
+
+{"sites": ["https://www.rogersar.gov", "https://jeffcomo.gov"], "keywords": ["engineering", "paving"], "closingWithinDays": 30, "onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $3.00 per 1,000 bids ($0.003 per bid) plus $0.00005 per run start. Platform usage is included. Error rows and bids skipped by <code>onlyNew</code> are not charged. Bids past <code>maxItems</code> are not saved and not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>CivicPlus Bid Postings pages only. Many agencies use other systems, and some post the full bid packet on a separate portal; the row links to the agency page that points there.</li>
+<li>The Bid Postings page is a posting board, not where you submit a bid. Follow the submission steps in the solicitation itself.</li>
+<li>Closing times are in the agency's local time and are not converted. Always confirm the deadline on the agency page.</li>
+<li>Reads robots.txt first and skips sites that block it; at least 2 seconds between requests to a site; never logs in or submits forms. Sites that cannot be read get a free error row.</li>
+<li>Not affiliated with CivicPlus or any government agency.</li>
+</ul>
+<p>Need city and county job openings instead? See <a href="https://apify.com/founder-experiment/civicplus-job-postings">City &amp; County Government Jobs (CivicPlus)</a> on Apify.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/civicplus-bid-postings">Open the city and county bids export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

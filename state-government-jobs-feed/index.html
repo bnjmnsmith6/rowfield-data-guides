@@ -6,19 +6,25 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <title>US state government jobs feed: California, New York, Wisconsin, North Dakota</title>
-<meta name="description" content="One feed of public state government job postings from California, New York, Wisconsin and North Dakota: one row shape, CSV/JSON/API, daily only-new mode.">
+<meta name="description" content="Export public state government job postings from California, New York, Wisconsin and North Dakota as one dataset: one row shape, CSV/JSON/Excel/API, daily only-new mode.">
 <link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/state-government-jobs-feed/">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 <header>
 <a class="brand" href="../">Rowfield Data guides</a>
-<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a></nav>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a></nav>
 </header>
 <main>
 <h1>US state government jobs feed</h1>
-<p class="lead">Each state runs its own hiring site with its own layout. If you want state civil service jobs in one list, for alerts, a job board, a newsletter or research, here is one way to get a single feed.</p>
+<p class="lead">Each state runs its own hiring site with its own layout and its own columns. If you need state civil service jobs from several states as data, in bulk and in one row shape, for a job board, a newsletter, a database or research, here is one way to get a single export.</p>
 <p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<p><strong>Only want e-mails about new California jobs?</strong> You do not need this tool. CalCareers has free Saved Searches: log in to your CalCareer account, run a search, click Save Search and pick how often to be notified.</p>
+<h2>Why one export across states</h2>
+<ul>
+<li>Every state list has different fields, layouts and paging. Combining them by hand means four different copy-and-clean jobs.</li>
+<li>The export returns one row per posting with the same columns for every state and a <code>state</code> field, ready for a spreadsheet, a database or an API call.</li>
+</ul>
 <h2>What the feed covers</h2>
 <p>Our <a href="https://apify.com/founder-experiment/us-state-government-jobs">US State Government Jobs Scraper</a> on Apify reads the public job lists of four states and returns one common row shape with a <code>state</code> field:</p>
 <ul>
@@ -39,12 +45,12 @@
 </ul>
 <p>No description text, contact names, e-mail addresses or phone numbers.</p>
 
-<h2>How to get a daily feed of new postings</h2>
+<h2>How to export postings, once or every day</h2>
 <ol>
-<li>Open the actor on Apify and pick states with <code>states</code> (<code>CA</code>, <code>NY</code>, <code>WI</code>, <code>ND</code>; default all four).</li>
+<li>Open the actor on Apify and pick states with <code>states</code> (<code>CA</code>, <code>NY</code>, <code>WI</code>, <code>ND</code>; default all four). For California, <code>calcareersMaxPages</code> sets how many result pages of 100 jobs to read (1 to 30).</li>
 <li>Add filters if you want: <code>titleKeywords</code> (for example <code>nurse</code>), <code>agencies</code>, <code>locations</code>, <code>closingWithinDays</code>, <code>postedWithinDays</code>.</li>
-<li>Turn on <code>onlyNew</code> and add a daily schedule. Later runs return and charge only postings you have not seen before (it remembers up to 80,000 job ids in a key-value store in your own Apify account).</li>
-<li>Export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>To keep your own dataset current, turn on <code>onlyNew</code> and add a daily schedule. Later runs return and charge only postings you have not seen before (it remembers up to 80,000 job ids in a key-value store named <code>us-state-gov-jobs-memory</code> in your own Apify account).</li>
 </ol>
 <p>Example inputs:</p>
 <pre>{"titleKeywords": ["nurse"]}
@@ -61,7 +67,8 @@
 <li>If one state fails (error, robots.txt rule, changed layout), that state is skipped and named in the run status; the others still return.</li>
 <li>Please run it at most once a day.</li>
 </ul>
-<p><a class="cta" href="https://apify.com/founder-experiment/us-state-government-jobs">Open the state jobs feed on Apify</a></p>
+<p>Only need one state? See the <a href="../california-state-jobs-feed/">California (CalCareers) export</a> or the <a href="../new-york-state-job-alerts/">New York State vacancies feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/us-state-government-jobs">Open the state jobs export on Apify</a></p>
 
 </main>
 <footer>

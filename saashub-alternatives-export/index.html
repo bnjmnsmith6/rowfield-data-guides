@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>SaaSHub alternatives export: software competitor lists as CSV rows</title>
+<meta name="description" content="Export the ranked SaaSHub alternatives list for each product you name: rank, alternative, votes, product rating and the CC BY-SA 4.0 attribution fields on every row. CSV, Excel, JSON or API.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/saashub-alternatives-export/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a></nav>
+</header>
+<main>
+<h1>SaaSHub alternatives export: competitor lists as rows</h1>
+<p class="lead">You have a list of software products and want the alternatives SaaSHub ranks for each one, as rows you can sort, compare or load into a sheet, with the license credit already on every row.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.</p>
+<h2>The official API first</h2>
+<p>SaaSHub has its own public API (marked beta on its API page, read 2026-11-02). It needs the API key from your SaaSHub profile, returns the top 10 alternatives for a query as JSON, and asks you to disclose on your website that you use it. If that covers you, use it.</p>
+<p>This tool needs no SaaSHub key, takes up to 500 products per run, and returns flat rows with source, license and attribution fields.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/saashub-alternatives-scraper">SaaSHub Software Alternatives Scraper</a> on Apify reads the public alternatives page of each product you list (for example <code>saashub.com/notion-alternatives</code>) and returns one row per ranked alternative:</p>
+<ul>
+<li>Your query, the product, its SaaSHub rating, review count and the page's last-update date</li>
+<li>Rank, alternative name, community votes and the alternative's own SaaSHub link</li>
+<li>Source URL, license name, license URL and an attribution line on every row</li>
+</ul>
+<p>Not collected: product descriptions, taglines, features, prices, user reviews, logos or screenshots. Sponsored and featured cards are skipped, so ranks count organic entries only.</p>
+
+<h2>How to export alternatives</h2>
+<ol>
+<li>Open the actor on Apify and list your <code>products</code>: names, SaaSHub slugs or SaaSHub URLs (for example <code>notion</code>, <code>monday</code>). If a name does not match, copy the slug from the SaaSHub page URL.</li>
+<li>Optional: <code>maxAlternativesPerProduct</code> keeps only the top N per product; <code>maxItems</code> caps the run and your cost.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>To track rankings over time, add a weekly schedule with the same products.</li>
+</ol>
+<p>Example input:</p>
+<pre>{"products": ["notion", "slack"], "maxAlternativesPerProduct": 10, "maxItems": 20}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.50 per 1,000 alternatives ($0.0015 per row) plus $0.00005 per run start. Status rows (product not found, blocked, failed) are free.</p>
+
+<h2>License and attribution</h2>
+<ul>
+<li>SaaSHub publishes its alternatives lists and stats under CC BY-SA 4.0. The output data stays CC BY-SA 4.0.</li>
+<li>If you share or build on it, keep the attribution and license fields (or an equal credit line with a link) and share your adapted data under the same license.</li>
+<li>The price pays for the extraction service and adds no extra terms to the data. Product names are trademarks of their owners.</li>
+</ul>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the first alternatives page of each product is read: usually the top 10 to 20 alternatives.</li>
+<li>Rank, votes and ratings are as shown at run time and change over time.</li>
+<li>Reads robots.txt first; one page per product, at least 2 seconds between requests; no login, no cookies.</li>
+<li>Not affiliated with or endorsed by SaaSHub.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/saashub-alternatives-scraper">Open the SaaSHub alternatives export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

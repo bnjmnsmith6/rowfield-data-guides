@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
-<title>Rowfield Data guides: sitemap to CSV and Excel, logo from a domain, government and school jobs data, Federal Register, EU tenders</title>
-<meta name="description" content="Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, US state, California, New York and K-12 school jobs data, Federal Register to CSV, EU TED tender exports.">
+<title>Rowfield Data guides: sitemap to CSV and Excel, logo from a domain, government jobs and bids data, Federal Register, EU tenders, CVEs</title>
+<meta name="description" content="Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, US state, California, New York and K-12 school jobs data, city and county bids, Federal Register to CSV, EU TED tender exports, NVD CVEs to CSV, SaaSHub alternatives.">
 <link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <header>
 <a class="brand" href="">Rowfield Data guides</a>
-<nav><a href="sitemap-to-csv/">Sitemap to CSV</a><a href="clearbit-logo-api-alternative/">Logo from a domain</a><a href="state-government-jobs-feed/">State jobs feed</a><a href="california-state-jobs-feed/">California jobs</a><a href="federal-register-api-to-csv/">Federal Register</a><a href="eu-tenders-ted-export/">EU tenders</a><a href="k12-teacher-jobs-data/">K-12 school jobs</a><a href="new-york-state-job-alerts/">New York jobs</a><a href="sitemap-to-excel/">Sitemap to Excel</a></nav>
+<nav><a href="sitemap-to-csv/">Sitemap to CSV</a><a href="clearbit-logo-api-alternative/">Logo from a domain</a><a href="state-government-jobs-feed/">State jobs feed</a><a href="california-state-jobs-feed/">California jobs</a><a href="federal-register-api-to-csv/">Federal Register</a><a href="eu-tenders-ted-export/">EU tenders</a><a href="k12-teacher-jobs-data/">K-12 school jobs</a><a href="new-york-state-job-alerts/">New York jobs</a><a href="sitemap-to-excel/">Sitemap to Excel</a><a href="city-county-bids-civicplus/">City and county bids</a><a href="nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="saashub-alternatives-export/">SaaSHub alternatives</a></nav>
 </header>
 <main>
 <h1>Rowfield Data guides</h1>
@@ -25,7 +25,7 @@
 <div class="card"><h2><a href="clearbit-logo-api-alternative/">Clearbit Logo API alternative: get a company logo from a domain</a></h2>
 <p>Give a list of domains, get the best logo URL, a square icon, every declared favicon and app icon, the site name and the theme color. No API key from a logo vendor.</p></div>
 <div class="card"><h2><a href="state-government-jobs-feed/">US state government jobs feed</a></h2>
-<p>Public job postings from the state hiring sites of California, New York, Wisconsin and North Dakota in one row shape, with a daily "only new" mode.</p></div>
+<p>Public job postings from the state hiring sites of California, New York, Wisconsin and North Dakota as one export with one row shape, for job boards, newsletters, databases and research, with a daily "only new" mode.</p></div>
 <div class="card"><h2><a href="california-state-jobs-feed/">California state jobs data export (CalCareers)</a></h2>
 <p>California state government job postings from the public CalCareers search as a spreadsheet or API rows: working title, classification, department, location, telework, salary range, dates and link. For bulk data and research, not job alerts (CalCareers has its own).</p></div>
 <div class="card"><h2><a href="federal-register-api-to-csv/">Federal Register API to CSV</a></h2>
@@ -38,6 +38,12 @@
 <p>A daily list of only the new New York State government vacancies from the public StateJobsNY table, filtered by title, agency or county.</p></div>
 <div class="card"><h2><a href="sitemap-to-excel/">Sitemap to Excel: convert an XML sitemap to a spreadsheet</a></h2>
 <p>A free paste-in tool that turns sitemap XML into a CSV file Excel opens directly. For whole sites, gzipped sitemaps and nested indexes, the Apify actor exports straight to Excel.</p></div>
+<div class="card"><h2><a href="city-county-bids-civicplus/">City and county bids and RFPs from CivicPlus sites as one CSV</a></h2>
+<p>Open bids, RFPs and RFQs from the Bid Postings pages of many CivicPlus city and county websites in one list: agency, state, bid number, title, deadline and link.</p></div>
+<div class="card"><h2><a href="nvd-cve-to-csv/">NVD CVEs to CSV, with CVSS, CWE and the CISA KEV flag</a></h2>
+<p>New or updated CVEs from the NIST NVD API as one row each: CVSS 4.0, 3.1 and 2.0 scores, severity, CWE ids, KEV flag, affected products and links.</p></div>
+<div class="card"><h2><a href="saashub-alternatives-export/">SaaSHub alternatives export: competitor lists as rows</a></h2>
+<p>The ranked alternatives list for each product you name on SaaSHub, with votes, rating and the CC BY-SA 4.0 attribution fields on every row.</p></div>
 </div>
 <h2 id="mcp">Use these tools from an AI agent (MCP)</h2>
 <p>Every tool in these guides also works as an MCP tool in Claude Desktop, Cursor and other MCP clients, through Apify's hosted MCP server. Runs are billed by Apify to your own account at each tool's listed price.</p>
