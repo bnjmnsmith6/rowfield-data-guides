@@ -25,5 +25,6 @@ https://bnjmnsmith6.github.io/rowfield-data-guides/
 - `latvia-public-sector-vacancies/`: Latvia public sector vacancies (NVA vakances) as rows
 - `empire-flippers-listings-export/`: Empire Flippers listings export: online businesses for sale as rows
 - `usgs-earthquake-data-to-csv/`: USGS earthquake data to CSV, one row per event
+- `mcp-server-for-ai-agents/`: use the tools from an AI agent: connect the Rowfield Data MCP server (official MCP Registry: `io.github.bnjmnsmith6/rowfield-data-mcp`)
 
 Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.

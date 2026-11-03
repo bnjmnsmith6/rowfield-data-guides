@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Rowfield Data MCP server: use our 20 data tools from Claude Desktop, Cursor and other AI agents</title>
+<meta name="description" content="Connect the Rowfield Data MCP server (io.github.bnjmnsmith6/rowfield-data-mcp in the official MCP Registry) to an MCP client: one remote URL on Apify's hosted MCP server, OAuth or Bearer token, or local stdio. Government jobs, bids and tenders, sitemaps, logos, CVEs and more.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/mcp-server-for-ai-agents/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a><a href="../mcp-server-for-ai-agents/">AI agents (MCP)</a></nav>
+</header>
+<main>
+<h1>Use Rowfield Data tools from an AI agent (MCP server)</h1>
+<p class="lead">You want Claude Desktop, Cursor or another MCP client to call our data tools directly: government jobs, bids and tenders, Federal Register documents, sitemaps, logos, link previews, CVEs and more, without writing API code.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. The MCP config repo and the MCP Registry listing are ours too. Each tool call starts an Apify Actor run billed by Apify to your own Apify account at that Actor's listed price.</p>
+
+<h2>Where it is listed</h2>
+<ul>
+<li><strong>Official MCP Registry:</strong> server name <code>io.github.bnjmnsmith6/rowfield-data-mcp</code>, version 0.1.0, remote type streamable HTTP. <a href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.bnjmnsmith6/rowfield-data-mcp">See the registry entry</a>.</li>
+<li><strong>GitHub:</strong> <a href="https://github.com/bnjmnsmith6/rowfield-data-mcp">github.com/bnjmnsmith6/rowfield-data-mcp</a> has the registry file (<code>server.json</code>), ready-made client configs, an install guide for AI coding agents and the full tool table with prices.</li>
+</ul>
+
+<h2>How it works</h2>
+<p>The repo has no server code of its own. The tools run on <strong>Apify's hosted MCP server</strong> (<code>https://mcp.apify.com</code>), which turns Apify Actors into MCP tools. The <code>tools</code> URL parameter picks which Actors your client sees. Each Actor shows up as a tool named <code>founder-experiment--&lt;actor-name&gt;</code>, for example <code>founder-experiment--sitemap-url-extractor</code>. Apify's server also adds helper tools such as <code>get-dataset-items</code>.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>An MCP client that supports remote (streamable HTTP) servers, or Node.js for the local option.</li>
+<li>An Apify account. Sign in with OAuth when your client asks, or use your own API token from Apify Console, API &amp; Integrations.</li>
+</ul>
+
+<h2>How to connect the MCP server</h2>
+<ol>
+<li>Open your client's MCP config (Claude Desktop: <code>claude_desktop_config.json</code>; Cursor: <code>~/.cursor/mcp.json</code> or <code>.cursor/mcp.json</code>).</li>
+<li>Add one of the configs below. All 20 tools use the same server URL as the registry entry.</li>
+<li>Restart or reload the client and list tools. You should see <code>founder-experiment--...</code> tools.</li>
+<li>Ask for data, for example "Get every URL from the sitemap of example.com and give me a CSV."</li>
+</ol>
+<p><strong>Option 1: OAuth</strong> (no token in the file; the client opens an Apify sign-in on first connection):</p>
+<pre>{
+  &quot;mcpServers&quot;: {
+    &quot;rowfield-data&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=founder-experiment/civicplus-job-postings,founder-experiment/k12-school-district-jobs-applitrack,founder-experiment/california-state-jobs-calcareers,founder-experiment/new-york-state-jobs-statejobsny,founder-experiment/wisconsin-state-government-jobs,founder-experiment/us-state-government-jobs,founder-experiment/canada-provincial-government-jobs,founder-experiment/manitoba-government-jobs,founder-experiment/victoria-government-jobs-careers-vic,founder-experiment/latvia-public-sector-vacancies,founder-experiment/civicplus-bid-postings,founder-experiment/eu-ted-tenders-scraper,founder-experiment/federal-register-documents-scraper,founder-experiment/sitemap-url-extractor,founder-experiment/website-logo-extractor,founder-experiment/nvd-cve-scraper,founder-experiment/saashub-alternatives-scraper,founder-experiment/empire-flippers-listings,founder-experiment/usgs-earthquake-catalog,founder-experiment/link-preview-open-graph-api&quot;
+    }
+  }
+}</pre>
+<p><strong>Option 2: Bearer token</strong> (replace <code>&lt;APIFY_TOKEN&gt;</code> with your own token; do not commit it):</p>
+<pre>{
+  &quot;mcpServers&quot;: {
+    &quot;rowfield-data&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=founder-experiment/civicplus-job-postings,founder-experiment/k12-school-district-jobs-applitrack,founder-experiment/california-state-jobs-calcareers,founder-experiment/new-york-state-jobs-statejobsny,founder-experiment/wisconsin-state-government-jobs,founder-experiment/us-state-government-jobs,founder-experiment/canada-provincial-government-jobs,founder-experiment/manitoba-government-jobs,founder-experiment/victoria-government-jobs-careers-vic,founder-experiment/latvia-public-sector-vacancies,founder-experiment/civicplus-bid-postings,founder-experiment/eu-ted-tenders-scraper,founder-experiment/federal-register-documents-scraper,founder-experiment/sitemap-url-extractor,founder-experiment/website-logo-extractor,founder-experiment/nvd-cve-scraper,founder-experiment/saashub-alternatives-scraper,founder-experiment/empire-flippers-listings,founder-experiment/usgs-earthquake-catalog,founder-experiment/link-preview-open-graph-api&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer &lt;APIFY_TOKEN&gt;&quot;
+      }
+    }
+  }
+}</pre>
+<p><strong>Option 3: local stdio</strong> for clients without remote server support (runs Apify's <code>@apify/actors-mcp-server</code> package with npx):</p>
+<pre>{
+  &quot;mcpServers&quot;: {
+    &quot;rowfield-data&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [
+        &quot;-y&quot;,
+        &quot;@apify/actors-mcp-server&quot;,
+        &quot;--tools&quot;,
+        &quot;founder-experiment/civicplus-job-postings,founder-experiment/k12-school-district-jobs-applitrack,founder-experiment/california-state-jobs-calcareers,founder-experiment/new-york-state-jobs-statejobsny,founder-experiment/wisconsin-state-government-jobs,founder-experiment/us-state-government-jobs,founder-experiment/canada-provincial-government-jobs,founder-experiment/manitoba-government-jobs,founder-experiment/victoria-government-jobs-careers-vic,founder-experiment/latvia-public-sector-vacancies,founder-experiment/civicplus-bid-postings,founder-experiment/eu-ted-tenders-scraper,founder-experiment/federal-register-documents-scraper,founder-experiment/sitemap-url-extractor,founder-experiment/website-logo-extractor,founder-experiment/nvd-cve-scraper,founder-experiment/saashub-alternatives-scraper,founder-experiment/empire-flippers-listings,founder-experiment/usgs-earthquake-catalog,founder-experiment/link-preview-open-graph-api&quot;
+      ],
+      &quot;env&quot;: {
+        &quot;APIFY_TOKEN&quot;: &quot;&lt;APIFY_TOKEN&gt;&quot;
+      }
+    }
+  }
+}</pre>
+
+<h2>Load fewer tools</h2>
+<p>A shorter tool list keeps the client focused. Swap the URL for one group:</p>
+<ul>
+<li>Developer, SEO and security data:<pre>https://mcp.apify.com?tools=founder-experiment/sitemap-url-extractor,founder-experiment/website-logo-extractor,founder-experiment/nvd-cve-scraper,founder-experiment/link-preview-open-graph-api</pre></li>
+<li>Bids, tenders and regulations:<pre>https://mcp.apify.com?tools=founder-experiment/civicplus-bid-postings,founder-experiment/eu-ted-tenders-scraper,founder-experiment/federal-register-documents-scraper</pre></li>
+<li>Government jobs and market and science data: see the grouped URLs in the <a href="https://github.com/bnjmnsmith6/rowfield-data-mcp#smaller-tool-sets">repo README</a>.</li>
+</ul>
+
+<h2>Price</h2>
+<p>The MCP config and registry listing are free. You pay only for Actor runs, billed by Apify to your account at each Actor's pay-per-result price plus $0.00005 per run start; for example the sitemap extractor is $0.25 per 1,000 URLs. Prices for every tool are in the <a href="https://github.com/bnjmnsmith6/rowfield-data-mcp#tools">repo tool table</a> and on each Store page, which is the source of truth.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>You need your own Apify account; runs bill to it.</li>
+<li>Each tool works the way its Actor does, with the same inputs and limits as described in its guide on this site.</li>
+<li>The server itself is Apify's. Rowfield Data publishes the Actors and the config, not the MCP server software. Not affiliated with or endorsed by Anthropic, Cursor or the MCP project.</li>
+</ul>
+<p><a class="cta" href="https://github.com/bnjmnsmith6/rowfield-data-mcp">Get the MCP configs on GitHub</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>
