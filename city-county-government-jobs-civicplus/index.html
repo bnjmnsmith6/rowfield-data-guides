@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>City and county government jobs from CivicPlus sites as one CSV</title>
+<meta name="description" content="Current job postings from the public Jobs pages of many CivicPlus city and county websites in one export: agency, state, title, department, posted and closing dates, salary when shown, link.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/city-county-government-jobs-civicplus/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>City and county government jobs from CivicPlus sites as one CSV</h1>
+<p class="lead">Many US cities and counties run their website on CivicPlus (CivicEngage) and list openings on a public Jobs page, usually at <code>/Jobs.aspx</code>. Each site lists only its own jobs. If you want current postings from many of these sites in one list, for a job board, a daily check or hiring research, here is how to get them as rows.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the agency's own page</h2>
+<ul>
+<li>Each agency's <code>/Jobs.aspx</code> page is public and free to read. If you only follow one or two cities or counties, open their pages directly.</li>
+<li>Every site is separate, so following many agencies means opening them one by one.</li>
+</ul>
+<p>This tool is for people who want many agencies in one export with the same columns, and optionally a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/civicplus-job-postings">Government Jobs Scraper: City &amp; County Jobs (CivicPlus)</a> on Apify comes with a built-in default list of CivicPlus city and county sites (the current count and the agencies by state are on the Store page). You can also add any other CivicPlus site with a <code>/Jobs.aspx</code> page by its base URL, up to 200 per run. One row per posting:</p>
+<ul>
+<li>Agency, state, country ("United States" or "Canada") and agency site</li>
+<li>Job id, title, department (when the title starts with a department name) and category</li>
+<li>Posted and closing dates as shown and as local date-times, and an open-until-filled flag</li>
+<li>Salary (the first pay figure shown in the listing snippet, when there is one)</li>
+<li>A link to the posting on the agency site</li>
+</ul>
+<p>No job descriptions, contact names, e-mail addresses or phone numbers. Open the link for the full posting and how to apply.</p>
+
+<h2>How to export city and county job postings</h2>
+<ol>
+<li>Open the actor on Apify. The form is prefilled with 6 sample sites so a first run finishes in under a minute. Clear <code>sites</code> to scan the full default list, or paste your own CivicPlus base URLs.</li>
+<li>Filter if you want: <code>keywords</code> (matches the start of a word in the title, department or category, so <code>fire</code> finds Firefighter), <code>states</code> (2-letter codes, for example <code>AR</code>, <code>OK</code>), <code>postedWithinDays</code>.</li>
+<li>Set <code>maxItems</code> to cap the run and your cost. Postings past the cap are not saved and not charged.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list of new postings, turn on <code>onlyNew</code> and add a schedule. Postings already returned for the same sites and filters are skipped and not charged.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"sites": [], "keywords": ["paramedic", "EMT"]}
+
+{"sites": [], "keywords": ["police", "sheriff", "deputy"], "states": ["TX", "TN", "GA"], "onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $2 per 1,000 job postings ($0.002 per posting) plus $0.00005 per run start. Platform usage is included. Error rows and postings skipped by <code>onlyNew</code> are not charged. Postings past <code>maxItems</code> are not saved and not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>CivicPlus Jobs pages only. Many agencies post jobs on other systems; those are not covered. It does not cover USAJOBS or federal jobs.</li>
+<li><code>salary</code>, <code>department</code> and closing dates appear only when the agency shows them on the listing page.</li>
+<li>Reads robots.txt first and skips sites that block <code>/Jobs.aspx</code>; at least 2 seconds between requests to a site; redirects are never followed. Sites that cannot be read get a free error row.</li>
+<li><code>states</code> and <code>keywords</code> only filter results; every listed site is still visited, so pass a short <code>sites</code> list for a small, fast run.</li>
+<li>Not affiliated with CivicPlus or any government agency.</li>
+</ul>
+<p>Need city and county bids and RFPs instead? See <a href="../city-county-bids-civicplus/">City and county bids and RFPs from CivicPlus sites</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/civicplus-job-postings">Open the city and county jobs export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

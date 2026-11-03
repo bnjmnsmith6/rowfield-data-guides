@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Victoria government jobs data: Careers Vic listings as CSV or JSON</title>
+<meta name="description" content="Export Victorian Government job listings from the public Careers Vic job board as CSV, JSON, Excel or API rows: title, organisation, work type, salary, grade, location, closing date and link.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/victoria-government-jobs-careers-vic/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Victoria government jobs data: Careers Vic listings as rows</h1>
+<p class="lead">Careers Vic (careers.vic.gov.au) lists Victorian Government jobs across many organisations. If you want those listings as a spreadsheet or API rows, filtered to the organisations, locations or salaries you care about, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the Careers Vic site</h2>
+<ul>
+<li>The Careers Vic job listing (careers.vic.gov.au/jobs) is public and free to search, with no login.</li>
+<li>If you only want to browse or apply, use the site directly.</li>
+</ul>
+<p>This tool is for people who want the listing as data: one row per job, the same columns every time, and optionally a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/victoria-government-jobs-careers-vic">Victoria Government Jobs Scraper (Australia, Careers Vic)</a> on Apify reads the public Careers Vic listing pages (15 jobs per page) and returns one row per job:</p>
+<ul>
+<li>Job id, title and organisation</li>
+<li>Work type (for example ongoing or fixed-term, full-time or part-time)</li>
+<li>Salary as shown, plus min and max numbers (empty for hourly rates)</li>
+<li>Grade, occupation and location</li>
+<li>Closing date as shown and as a date</li>
+<li>A link to the job and a source line</li>
+</ul>
+<p>It does not open individual job pages, so there is no description, selection criteria, reference number or posted date; open the link for those. No contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to export Careers Vic jobs</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"searchText": "analyst", "maxPages": 3}</code> reads up to 3 listing pages (up to 45 jobs).</li>
+<li>Use <code>searchText</code> to send search words to Careers Vic, like its search box, so fewer pages are read. Set <code>maxPages</code> (15 jobs per page, maximum 200) for how far to read.</li>
+<li>Filter if you want: <code>titleKeywords</code>, <code>excludeKeywords</code>, <code>organisations</code>, <code>locations</code>, <code>workTypes</code>, <code>minSalary</code> (AUD per year; jobs without a listed salary are kept), <code>closingWithinDays</code>.</li>
+<li>Set <code>maxItems</code> to cap the run and your cost.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a feed, turn on <code>onlyNew</code> and add a daily schedule. Each run returns only jobs earlier runs did not return (memory in a key-value store named <code>careersvic-jobs-memory</code> in your own Apify account).</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"searchText": "analyst", "maxPages": 5}
+
+{"maxPages": 200, "locations": ["Melbourne"], "workTypes": ["Ongoing"], "minSalary": 100000}
+
+{"maxPages": 10, "onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.50 per 1,000 jobs ($0.0005 per job) plus $0.00005 per run start. Platform usage is included. Jobs removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the facts shown on the listing cards. Values are kept as Careers Vic shows them; salary, grade and location are empty when the site shows "not specified".</li>
+<li>Listing order is the site's order; jobs can shift between pages during a long run (duplicates are removed by job id).</li>
+<li>Reads robots.txt first; listing pages one at a time, at least 2.5 seconds apart. Please run it at most once a day, and use <code>searchText</code> or a small <code>maxPages</code> when you can.</li>
+<li>Not made by or affiliated with the State of Victoria, the Victorian Public Sector Commission or Careers Vic. Job listing content &copy; State of Victoria and the listing organisations.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/victoria-government-jobs-careers-vic">Open the Careers Vic jobs export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

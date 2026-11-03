@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Canada provincial government jobs: Manitoba, New Brunswick and Newfoundland and Labrador in one export</title>
+<meta name="description" content="Provincial government job postings from Manitoba, New Brunswick and Newfoundland and Labrador in one row shape: province, title, department, location, salary when shown, dates and link. Daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/canada-provincial-government-jobs/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Canada provincial government jobs in one export</h1>
+<p class="lead">Each Canadian province posts its public service jobs on its own site, in its own format. If you want postings from Manitoba, New Brunswick and Newfoundland and Labrador in one list with the same columns, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the provincial sites</h2>
+<ul>
+<li>All three lists are public and free to read with no login: the Manitoba job feed (jobsearch.gov.mb.ca), the New Brunswick Open Competitions list (www.ere.gnb.ca) and the Newfoundland and Labrador career opportunities list (www.hiring.gov.nl.ca).</li>
+<li>If you only follow one province, its own site may be enough.</li>
+</ul>
+<p>This tool is for people who want the three lists as one export with one row shape, and optionally a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/canada-provincial-government-jobs">Canada Provincial Government Jobs Scraper</a> on Apify reads each selected province's public list and returns one row per posting:</p>
+<ul>
+<li>Province and province code, job id, title and competition or ad number</li>
+<li>Department, employer (NL) and classification or position group</li>
+<li>Job types and locations</li>
+<li>Salary as shown, plus annual min and max in CAD, when the province shows it</li>
+<li>Posted date, closing date, language and a cancelled flag (NL)</li>
+<li>A link, a link type and the attribution for that province</li>
+</ul>
+<p>Fields a province does not publish are empty. New Brunswick rows have no salary, job type or posted date, show a short department code, and link to the Open Competitions list page because individual competitions have no direct link. No descriptions, contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to export provincial government jobs</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input reads all three provinces (<code>MB</code>, <code>NB</code>, <code>NL</code>) and returns up to 20 postings.</li>
+<li>Pick <code>provinces</code>, then filter if you want: <code>titleKeywords</code>, <code>excludeKeywords</code>, <code>departments</code>, <code>locations</code>, <code>jobTypes</code>, <code>language</code>, <code>minSalary</code> (CAD per year), <code>closingWithinDays</code>, <code>includeNoClosingDate</code>, <code>postedWithinDays</code>, <code>includeCancelled</code>.</li>
+<li>Set <code>maxItems</code> to cap the run and your cost (province order, then list order).</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list, turn on <code>onlyNew</code> and add a schedule (memory in a key-value store named <code>canada-provincial-gov-jobs-memory</code> in your own Apify account).</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"titleKeywords": ["engineer", "technologist"]}
+
+{"provinces": ["NB", "NL"], "closingWithinDays": 14}
+
+{"onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.00 per 1,000 jobs ($0.001 per job) plus $0.00005 per run start. Platform usage is included. Jobs removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Three provinces today: Manitoba, New Brunswick and Newfoundland and Labrador. Other provinces are not included.</li>
+<li>Values are kept as shown; department names and job types are not standardised across provinces.</li>
+<li>Two requests per province (robots.txt, then the list), at least 2.5 seconds apart. If one province fails, it is skipped and named in the run status. Please run it at most once a day.</li>
+<li>Manitoba: contains information licensed under the OpenMB Information and Data Use License. New Brunswick: contains information licensed under the Open Government Licence - New Brunswick. Not made by, affiliated with or endorsed by any of these governments.</li>
+</ul>
+<p>Only need Manitoba, with its category feeds? See the <a href="../manitoba-government-jobs-feed/">Manitoba government jobs feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/canada-provincial-government-jobs">Open the Canada provincial jobs export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

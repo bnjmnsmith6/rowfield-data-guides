@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Latvia public sector vacancies (NVA vakances) as CSV or JSON</title>
+<meta name="description" content="Current Latvian state and municipal vacancies from the NVA open data set (CC0) as rows: title, category, employer name, salary range, workload, address, deadline and link. Daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/latvia-public-sector-vacancies/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Latvia public sector vacancies (NVA vakances) as rows</h1>
+<p class="lead">The Latvian State Employment Agency (NVA) publishes current state sector vacancies as an open data set on data.gov.lv. The set identifies employers by registration number. If you want the vacancies as clean rows with employer names and filters, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the open data set</h2>
+<ul>
+<li>The NVA "Vakances" data set on data.gov.lv is free open data under the CC0 1.0 licence. If you are happy to download it and join employer names yourself, use it directly.</li>
+<li>Each vacancy also has a public page on the NVA CV and vacancy portal.</li>
+</ul>
+<p>This tool is for people who want the set already filtered, with employer names added, and optionally as a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/latvia-public-sector-vacancies">Latvia Public Sector Vacancies (NVA)</a> on Apify reads the NVA data set through the portal's data API and returns one row per vacancy:</p>
+<ul>
+<li>Vacancy id, title and category</li>
+<li>Employer registration number and <strong>employer name</strong>, looked up in two more CC0 sets on the same portal (the public institutions list and the Company Register)</li>
+<li>Salary from and to, kept exactly as published</li>
+<li>Workload, working time and hours per week</li>
+<li>Workplace address, update date and application deadline</li>
+<li>A link to the vacancy on the NVA portal and an attribution line</li>
+</ul>
+<p>It does not open the portal pages, so there is no description, duties or how-to-apply text. No contact names, e-mail addresses or phone numbers. Texts stay in Latvian, as published.</p>
+
+<h2>How to export Latvian public sector vacancies</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"maxItems": 20}</code> returns up to 20 vacancies.</li>
+<li>Filter if you want: <code>titleKeywords</code> (for example <code>jurist</code>, <code>skolotāj</code>), <code>excludeKeywords</code>, <code>categories</code> (for example <code>Izglītība</code>), <code>locations</code> (for example <code>Rīga</code>), <code>employers</code>, <code>employerRegNumbers</code>, <code>minSalary</code>, <code>closingWithinDays</code>, <code>updatedWithinDays</code>.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list, turn on <code>onlyNew</code> and add a schedule (memory in a key-value store named <code>lv-public-vacancies-memory</code> in your own Apify account).</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"locations": ["Rīga"]}
+
+{"titleKeywords": ["skolotāj"], "closingWithinDays": 14}
+
+{"onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.50 per 1,000 vacancies ($0.0005 per vacancy) plus $0.00005 per run start. Platform usage is included. Vacancies removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the facts in the open data set, kept as published. The data set gives no unit for salary amounts.</li>
+<li>Vacancies in the NVA state sector data set only; the wider private-sector job market is not included.</li>
+<li>Sole traders and other non-company register entries keep the number only; the employer name is empty for them.</li>
+<li>Reads robots.txt first; about six requests per run, at least 2.5 seconds apart. The data set is updated daily, so please run it at most once a day.</li>
+<li>Not made by, affiliated with or endorsed by NVA (Nodarbinātības valsts aģentūra), the Register of Enterprises or any Latvian authority.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/latvia-public-sector-vacancies">Open the Latvia vacancies export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

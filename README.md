@@ -17,5 +17,13 @@ https://bnjmnsmith6.github.io/rowfield-data-guides/
 - `saashub-alternatives-export/`: SaaSHub alternatives export
 - `sitemap-extractors-compared/`: sitemap extractors on Apify compared (dated prices)
 - `link-preview-api/`: link preview API, title, description, og:image and Open Graph tags for a list of URLs
+- `city-county-government-jobs-civicplus/`: city and county government jobs from CivicPlus sites as one CSV
+- `victoria-government-jobs-careers-vic/`: Victoria government jobs data: Careers Vic listings as rows
+- `manitoba-government-jobs-feed/`: Manitoba government jobs feed: a daily list of new postings
+- `wisconsin-state-jobs-feed/`: Wisconsin state jobs feed: wisc.jobs listings as rows
+- `canada-provincial-government-jobs/`: Canada provincial government jobs in one export
+- `latvia-public-sector-vacancies/`: Latvia public sector vacancies (NVA vakances) as rows
+- `empire-flippers-listings-export/`: Empire Flippers listings export: online businesses for sale as rows
+- `usgs-earthquake-data-to-csv/`: USGS earthquake data to CSV, one row per event
 
 Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent.

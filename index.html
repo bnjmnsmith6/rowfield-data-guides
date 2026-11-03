@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
-<title>Rowfield Data guides: sitemap to CSV and Excel, logo from a domain, government jobs and bids data, Federal Register, EU tenders, CVEs, link previews</title>
-<meta name="description" content="Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, US state, California, New York and K-12 school jobs data, city and county bids, Federal Register to CSV, EU TED tender exports, NVD CVEs to CSV, SaaSHub alternatives, link previews and Open Graph tags.">
+<title>Rowfield Data guides: sitemap to CSV and Excel, logo from a domain, government jobs and bids data, Federal Register, EU tenders, CVEs, link previews, earthquakes, business listings</title>
+<meta name="description" content="Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, US state, California, New York and K-12 school jobs data, city and county bids, Federal Register to CSV, EU TED tender exports, NVD CVEs to CSV, SaaSHub alternatives, link previews and Open Graph tags, city and county, Wisconsin, Victoria, Manitoba, Canadian provincial and Latvian public sector jobs, Empire Flippers listings and USGS earthquakes.">
 <link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <header>
 <a class="brand" href="">Rowfield Data guides</a>
-<nav><a href="sitemap-to-csv/">Sitemap to CSV</a><a href="clearbit-logo-api-alternative/">Logo from a domain</a><a href="state-government-jobs-feed/">State jobs feed</a><a href="california-state-jobs-feed/">California jobs</a><a href="federal-register-api-to-csv/">Federal Register</a><a href="eu-tenders-ted-export/">EU tenders</a><a href="k12-teacher-jobs-data/">K-12 school jobs</a><a href="new-york-state-job-alerts/">New York jobs</a><a href="sitemap-to-excel/">Sitemap to Excel</a><a href="city-county-bids-civicplus/">City and county bids</a><a href="nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="saashub-alternatives-export/">SaaSHub alternatives</a><a href="sitemap-extractors-compared/">Sitemap extractors compared</a><a href="link-preview-api/">Link preview API</a></nav>
+<nav><a href="sitemap-to-csv/">Sitemap to CSV</a><a href="clearbit-logo-api-alternative/">Logo from a domain</a><a href="state-government-jobs-feed/">State jobs feed</a><a href="california-state-jobs-feed/">California jobs</a><a href="federal-register-api-to-csv/">Federal Register</a><a href="eu-tenders-ted-export/">EU tenders</a><a href="k12-teacher-jobs-data/">K-12 school jobs</a><a href="new-york-state-job-alerts/">New York jobs</a><a href="sitemap-to-excel/">Sitemap to Excel</a><a href="city-county-bids-civicplus/">City and county bids</a><a href="nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="saashub-alternatives-export/">SaaSHub alternatives</a><a href="sitemap-extractors-compared/">Sitemap extractors compared</a><a href="link-preview-api/">Link preview API</a><a href="city-county-government-jobs-civicplus/">City and county jobs</a><a href="victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="manitoba-government-jobs-feed/">Manitoba jobs</a><a href="wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="canada-provincial-government-jobs/">Canada provincial jobs</a><a href="latvia-public-sector-vacancies/">Latvia vacancies</a><a href="empire-flippers-listings-export/">Empire Flippers listings</a><a href="usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
 </header>
 <main>
 <h1>Rowfield Data guides</h1>
@@ -48,6 +48,22 @@
 <p>Five Apify actors that turn a website's sitemaps into a URL list, side by side: price per 1,000 URLs (checked 2026-11-02), input and what each one does differently. Free options first.</p></div>
 <div class="card"><h2><a href="link-preview-api/">Link preview API: title, description and og:image for a list of URLs</a></h2>
 <p>Free ways to read Open Graph tags first, then a pay-per-preview tool for bulk lists: title, description, og:image, Twitter card tags, favicon and canonical per URL. Failed URLs are free.</p></div>
+<div class="card"><h2><a href="city-county-government-jobs-civicplus/">City and county government jobs from CivicPlus sites as one CSV</a></h2>
+<p>Current job postings from the public Jobs pages of many CivicPlus city and county websites in one list: agency, state, title, department, dates, salary when shown and link, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="victoria-government-jobs-careers-vic/">Victoria government jobs data: Careers Vic listings as rows</a></h2>
+<p>Victorian Government (Australia) job listings from the public Careers Vic job board as one row each: title, organisation, work type, salary, grade, location, closing date and link, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="manitoba-government-jobs-feed/">Manitoba government jobs feed: a daily list of new postings</a></h2>
+<p>Manitoba (Canada) government job postings from the province's public job feed: title, department, classification, salary, location, posted and closing dates and link, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="wisconsin-state-jobs-feed/">Wisconsin state jobs feed: wisc.jobs listings as rows</a></h2>
+<p>Wisconsin state government job listings from the public wisc.jobs list: title, agency, job class, category, location, posted and closing date and link, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="canada-provincial-government-jobs/">Canada provincial government jobs in one export</a></h2>
+<p>Public provincial government job postings from Manitoba, New Brunswick and Newfoundland and Labrador in one row shape with a province field, for job alerts, job boards and research, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="latvia-public-sector-vacancies/">Latvia public sector vacancies (NVA vakances) as rows</a></h2>
+<p>Current Latvian public sector vacancies from the NVA open data set (CC0) with employer names added: title, category, salary range, workload, address, deadline and link, with a daily "only new" mode.</p></div>
+<div class="card"><h2><a href="empire-flippers-listings-export/">Empire Flippers listings export: online businesses for sale as rows</a></h2>
+<p>Online businesses for sale (or sold) on the Empire Flippers marketplace as one row each: asking price, multiples, net profit, revenue, niches, monetization and link, with a daily "only new" mode for deal alerts.</p></div>
+<div class="card"><h2><a href="usgs-earthquake-data-to-csv/">USGS earthquake data to CSV, one row per event</a></h2>
+<p>Earthquakes from the public USGS catalog as one row each: time, magnitude, place, coordinates, depth, PAGER alert, tsunami flag and link. Filter by date, magnitude, radius or box, with an "only new" mode.</p></div>
 </div>
 <h2 id="mcp">Use these tools from an AI agent (MCP)</h2>
 <p>Every tool in these guides also works as an MCP tool in Claude Desktop, Cursor and other MCP clients, through Apify's hosted MCP server. Runs are billed by Apify to your own account at each tool's listed price.</p>

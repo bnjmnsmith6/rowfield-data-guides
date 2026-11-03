@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Wisconsin state jobs feed: wisc.jobs listings as CSV or JSON</title>
+<meta name="description" content="Wisconsin state government job listings from the public wisc.jobs list as rows: title, agency, job class, category, location, posted and closing date, link. Daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/wisconsin-state-jobs-feed/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Wisconsin state jobs feed: wisc.jobs listings as rows</h1>
+<p class="lead">State of Wisconsin agencies list their open jobs on wisc.jobs. If you want that list as a spreadsheet or API rows, or a daily list of only the new postings filtered by agency, location or category, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: wisc.jobs itself</h2>
+<ul>
+<li>The public job list on wisc.jobs is free to browse, with no login.</li>
+<li>If you only want to browse or apply, use the site directly.</li>
+</ul>
+<p>This tool is for people who want the list as data: one row per posting, the same columns every time, and optionally a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/wisconsin-state-government-jobs">Wisconsin State Government Jobs Scraper</a> on Apify reads the public job list on wisc.jobs (one request per run) and returns one row per posting:</p>
+<ul>
+<li>Title, agency and agency code</li>
+<li>Job classification code and title, and job category</li>
+<li>Location</li>
+<li>Posting date and deadline date (empty when the posting is open until filled)</li>
+<li>A link to the posting and an attribution line</li>
+</ul>
+<p>It does not open posting pages, so there is no description, duties, salary or how-to-apply text; open the link for those. No contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to export Wisconsin state jobs</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input returns up to 20 postings (<code>maxItems</code>).</li>
+<li>Filter if you want: <code>titleKeywords</code> (title or classification), <code>excludeKeywords</code>, <code>agencies</code> (for example <code>Corrections</code>), <code>locations</code> (for example <code>Madison</code> or <code>Statewide</code>), <code>jobCategories</code>, <code>closingWithinDays</code>, <code>includeNoClosingDate</code>, <code>postedWithinDays</code>.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list, turn on <code>onlyNew</code> and add a schedule. Later runs return only postings earlier runs did not return (memory in a key-value store named <code>wi-state-jobs-memory</code> in your own Apify account).</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"locations": ["Madison"]}
+
+{"titleKeywords": ["engineer"], "postedWithinDays": 7}
+
+{"onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.50 per 1,000 jobs ($0.0005 per job) plus $0.00005 per run start. Platform usage is included. Jobs removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the facts on the public list. Internal-only postings are not on it.</li>
+<li>State agency postings on wisc.jobs only; not cities, counties, school districts or the University of Wisconsin system.</li>
+<li>Reads robots.txt first; 2 requests per run, at least 2.5 seconds apart. Please run it at most once a day.</li>
+<li>Not made by, affiliated with or endorsed by the State of Wisconsin.</li>
+</ul>
+<p>Need California, New York or North Dakota in the same row shape? See the <a href="../state-government-jobs-feed/">US state government jobs feed</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/wisconsin-state-government-jobs">Open the Wisconsin state jobs feed on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

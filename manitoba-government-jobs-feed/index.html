@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Manitoba government jobs feed: new postings as CSV or JSON</title>
+<meta name="description" content="Manitoba (Canada) government job postings from the public job site feed as rows: title, department, classification, job type, salary, location, posted and closing dates, link. Daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/manitoba-government-jobs-feed/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Manitoba government jobs feed: a daily list of new postings</h1>
+<p class="lead">The Government of Manitoba lists its open postings on jobsearch.gov.mb.ca. If you want them as rows in a spreadsheet, or a daily list of only the new ones filtered by department, location or salary, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the public RSS feed</h2>
+<ul>
+<li>The job site publishes public RSS feeds for all positions and for each job category. Anyone can add them to an RSS reader for free, with no login.</li>
+<li>If a feed reader is all you need, use that.</li>
+</ul>
+<p>This tool is for people who want the feed as structured rows (salary as numbers, dates, department) with filters, and optionally a scheduled "only new" list.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/manitoba-government-jobs">Manitoba Government Jobs Scraper (Canada)</a> on Apify reads the public RSS job feed (one request per run), for all positions or one category, and returns one row per posting:</p>
+<ul>
+<li>Advertisement number, title, classification and job type</li>
+<li>Department and location</li>
+<li>Salary as shown, plus annual min and max numbers (empty for hourly or bi-weekly pay)</li>
+<li>Equity advertisement type and posting type</li>
+<li>Posted date, closing date and language</li>
+<li>A link to the posting and the OpenMB licence attribution</li>
+</ul>
+<p>It does not open job pages, so there is no description, duties, qualifications or how-to-apply text; open the link for those. No contact names, e-mail addresses or phone numbers.</p>
+
+<h2>How to get Manitoba government jobs as rows</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"category": "all", "maxItems": 20}</code> returns up to 20 postings.</li>
+<li>Pick a <code>category</code>: <code>all</code> or one category feed, for example <code>information-technology</code> or <code>health-social-services</code>.</li>
+<li>Filter if you want: <code>titleKeywords</code>, <code>excludeKeywords</code>, <code>departments</code>, <code>locations</code>, <code>jobTypes</code>, <code>language</code> (<code>en</code> or <code>fr</code>), <code>minSalary</code> (CAD per year), <code>closingWithinDays</code>, <code>postedWithinDays</code>.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a daily list, turn on <code>onlyNew</code> and add a schedule. Later runs return and charge only postings you have not received before (memory in a key-value store named <code>manitoba-gov-jobs-memory</code> in your own Apify account).</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"category": "information-technology"}
+
+{"locations": ["Winnipeg"], "minSalary": 80000}
+
+{"onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.50 per 1,000 jobs ($0.0005 per job) plus $0.00005 per run start. Platform usage is included. Jobs removed by your filters, cut by <code>maxItems</code> or skipped by <code>onlyNew</code> are not charged.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only the facts in the feed. Values are kept as the feed shows them; French postings keep the French text.</li>
+<li>A small, focused feed: Manitoba provincial government postings only.</li>
+<li>Reads robots.txt first; 2 requests per run, at least 2.5 seconds apart. Please run it at most once a day.</li>
+<li>Contains information from the Government of Manitoba, licensed under the OpenMB Information and Data Use License. Not made by, affiliated with or endorsed by the Government of Manitoba.</li>
+</ul>
+<p>Need New Brunswick and Newfoundland and Labrador too? See <a href="../canada-provincial-government-jobs/">Canada provincial government jobs</a>.</p>
+<p><a class="cta" href="https://apify.com/founder-experiment/manitoba-government-jobs">Open the Manitoba government jobs feed on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

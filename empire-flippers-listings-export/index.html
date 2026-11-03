@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Empire Flippers listings export: online businesses for sale as CSV or JSON</title>
+<meta name="description" content="Export Empire Flippers marketplace listings as rows: asking price, annual and monthly multiple, net profit, revenue, niches, monetization, listing dates and link. For sale or sold. Daily only-new mode.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/empire-flippers-listings-export/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>Empire Flippers listings export: online businesses for sale as rows</h1>
+<p class="lead">Empire Flippers is a marketplace for buying and selling online businesses. If you want its listings as a spreadsheet to compare multiples by niche, pull sold listings for valuation comps, or get a daily list of only the new deals, here is how.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free first: the public Marketplace API</h2>
+<ul>
+<li>Empire Flippers publishes a public Marketplace API. Its API page says: "You can use this to syndicate those listings on your own website, email list, or use the data personally as a buyer." If you are happy to script it, use it directly.</li>
+<li>For browsing, the marketplace website itself is free.</li>
+</ul>
+<p>This tool is for people who want the listings already flattened into rows, filtered, and optionally as a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/empire-flippers-listings">Empire Flippers Listings Scraper</a> on Apify reads the public Marketplace API and returns one row per listing:</p>
+<ul>
+<li>Listing number, title and status (For Sale, Pending Sold or Sold)</li>
+<li>Asking price, annual and monthly multiple, and multiple type</li>
+<li>Net profit, revenue, expenses, profit margin and 12-month trends</li>
+<li>Niches, monetization models, platforms, traffic, countries and assets included</li>
+<li>Listing dates and a link to the listing page</li>
+</ul>
+<p>Only factual listing fields. It does not output seller names or contact details, seller interview links, the free-text write-ups, images, or any data behind Empire Flippers' NDA or login. Business URLs are not public in the API and are not included.</p>
+
+<h2>How to export Empire Flippers listings</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"listingStatus": "For Sale", "maxItems": 20}</code> returns up to 20 listings.</li>
+<li>Pick <code>listingStatus</code>: <code>For Sale</code> for the live marketplace, or <code>Sold</code> for past sales (with an optional <code>soldSince</code> date).</li>
+<li>Filter if you want: <code>search</code> (for example <code>Amazon FBA</code> or <code>SaaS</code>), <code>minPrice</code>/<code>maxPrice</code>, <code>minAnnualNetProfit</code>/<code>maxAnnualNetProfit</code>, <code>minAnnualMultiple</code>/<code>maxAnnualMultiple</code>, <code>sortBy</code> and <code>sortOrder</code>.</li>
+<li>Set <code>maxItems</code> to cap the run and your cost.</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For deal alerts, turn on <code>onlyNew</code> and add a daily schedule. Later runs return and charge only listings you have not received before. Use <code>stateKey</code> to keep a separate memory per saved search.</li>
+</ol>
+<p>Example input:</p>
+<pre>{"listingStatus": "For Sale", "minAnnualNetProfit": 50000, "maxItems": 20, "onlyNew": true}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $1.5 per 1,000 listings ($0.0015 per listing) plus $0.00005 per run start. Status rows (nothing matched, API failed) are free. <code>maxItems</code> caps rows and cost.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only listings Empire Flippers shows in its public API. Its API page notes: "Listings may disappear from the API for various internal reasons."</li>
+<li>Numbers are as reported on the listing at run time. They are not audited by this tool.</li>
+<li>Only-new mode remembers listing numbers, not price changes. A re-priced listing with the same number is not returned again.</li>
+<li>Sold listings may not show a sale price or sold date in the API; empty fields stay empty, never guessed.</li>
+<li>Reads robots.txt first; one request at a time, at least 2 seconds apart; no login, no cookies.</li>
+<li>Not affiliated with or endorsed by Empire Flippers. Empire Flippers is a trademark of its owner.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/empire-flippers-listings">Open the Empire Flippers listings export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>

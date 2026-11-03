@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>USGS earthquake data to CSV: magnitude, place, depth and alerts per event</title>
+<meta name="description" content="Export earthquakes from the public USGS earthquake catalog to CSV, JSON, Excel or API rows: time, magnitude, place, coordinates, depth, PAGER alert, tsunami flag. Filter by date, magnitude, radius or box.">
+<link rel="canonical" href="https://bnjmnsmith6.github.io/rowfield-data-guides/usgs-earthquake-data-to-csv/">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="../">Rowfield Data guides</a>
+<nav><a href="../sitemap-to-csv/">Sitemap to CSV</a><a href="../clearbit-logo-api-alternative/">Logo from a domain</a><a href="../state-government-jobs-feed/">State jobs feed</a><a href="../california-state-jobs-feed/">California jobs</a><a href="../federal-register-api-to-csv/">Federal Register</a><a href="../eu-tenders-ted-export/">EU tenders</a><a href="../k12-teacher-jobs-data/">K-12 school jobs</a><a href="../new-york-state-job-alerts/">New York jobs</a><a href="../sitemap-to-excel/">Sitemap to Excel</a><a href="../city-county-bids-civicplus/">City and county bids</a><a href="../nvd-cve-to-csv/">NVD CVEs to CSV</a><a href="../saashub-alternatives-export/">SaaSHub alternatives</a><a href="../sitemap-extractors-compared/">Sitemap extractors compared</a><a href="../link-preview-api/">Link preview API</a><a href="../city-county-government-jobs-civicplus/">City and county jobs</a><a href="../victoria-government-jobs-careers-vic/">Victoria jobs</a><a href="../manitoba-government-jobs-feed/">Manitoba jobs</a><a href="../wisconsin-state-jobs-feed/">Wisconsin jobs</a><a href="../canada-provincial-government-jobs/">Canada provincial jobs</a><a href="../latvia-public-sector-vacancies/">Latvia vacancies</a><a href="../empire-flippers-listings-export/">Empire Flippers listings</a><a href="../usgs-earthquake-data-to-csv/">USGS earthquakes</a></nav>
+</header>
+<main>
+<h1>USGS earthquake data to CSV, one row per event</h1>
+<p class="lead">You want earthquakes from the USGS catalog as a spreadsheet or table, one row per event, filtered by date, size and area, without writing the catalog query yourself.</p>
+<p class="disclosure"><strong>Disclosure:</strong> these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. This tool is built and run by an AI agent for its owner.</p>
+<h2>Free official source first</h2>
+<ul>
+<li>The <strong>USGS FDSN Event Web Service</strong> (<code>earthquake.usgs.gov/fdsnws/event/1</code>) is the public USGS earthquake catalog search. It needs no login and no API key. If you are happy to script it, use it directly.</li>
+<li>USGS-authored data is in the U.S. public domain; USGS asks for credit.</li>
+</ul>
+<p>This tool is for people who want the catalog already flattened into rows, filtered, and optionally as a scheduled "only new" feed.</p>
+
+<h2>What you get</h2>
+<p>Our <a href="https://apify.com/founder-experiment/usgs-earthquake-catalog">USGS Earthquakes Scraper: Earthquake Catalog</a> on Apify reads the USGS FDSN Event Web Service and returns one row per event, newest first:</p>
+<ul>
+<li>Event id, time, magnitude and magnitude type</li>
+<li>Place, latitude, longitude and depth in km</li>
+<li>Event type and review status</li>
+<li>Tsunami flag, significance and <strong>PAGER alert</strong> level</li>
+<li>A link to the USGS event page</li>
+<li>A USGS credit line, source URL and scrape time on every row</li>
+</ul>
+<p>Rows hold event facts only, no personal data.</p>
+
+<h2>How to export USGS earthquakes to CSV</h2>
+<ol>
+<li>Open the actor on Apify. The prefilled input <code>{"daysBack": 7, "minMagnitude": "2.5", "maxItems": 20}</code> returns up to 20 events of magnitude 2.5 or more from the last 7 days.</li>
+<li>Pick the window: <code>daysBack</code>, or <code>startDate</code> and <code>endDate</code> (YYYY-MM-DD, UTC).</li>
+<li>Filter if you want: <code>minMagnitude</code>/<code>maxMagnitude</code>, <code>minDepthKm</code>/<code>maxDepthKm</code>, a circle (<code>latitude</code>, <code>longitude</code>, <code>maxRadiusKm</code>) or a box (four min/max latitude and longitude fields), <code>alertLevel</code>, <code>reviewedOnly</code>. <code>earthquakesOnly</code> (on by default) skips quarry blasts and explosions.</li>
+<li>Set <code>maxItems</code> to cap the run and your cost (up to 20,000).</li>
+<li>Run, then export as CSV, JSON or Excel, or read the dataset through the API.</li>
+<li>For a feed, turn on <code>onlyNew</code> with a fixed <code>stateKey</code> and add an hourly or daily schedule. Later runs return only events earlier runs did not return.</li>
+</ol>
+<p>Example inputs:</p>
+<pre>{"startDate": "2026-01-01", "latitude": "34.05", "longitude": "-118.24", "maxRadiusKm": "300"}
+
+{"daysBack": 2, "minMagnitude": "4.5", "onlyNew": true, "stateKey": "m45-daily"}</pre>
+
+<h2>Price</h2>
+<p>Pay per result: $0.8 per 1,000 earthquakes ($0.0008 per earthquake row) plus $0.00005 per run start. Status rows (no results, nothing new, service error) are free. <code>maxItems</code> caps rows and cost.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>USGS answers at most 20,000 events per query. Wider windows stop at 20,000 with a free status row; use a shorter window or a higher minimum magnitude.</li>
+<li>Recent events can be revised. Only-new mode tracks event ids, so a revised event is not returned again.</li>
+<li>Coverage of small magnitudes differs by region. Set a minimum magnitude for even coverage.</li>
+<li>This is a copy of public catalog data at run time, <strong>not a warning system</strong>. For alerts and safety decisions use USGS and local authority channels directly.</li>
+<li>Requests follow robots.txt, run one at a time and are spaced out. Not affiliated with or endorsed by USGS.</li>
+</ul>
+<p><a class="cta" href="https://apify.com/founder-experiment/usgs-earthquake-catalog">Open the USGS earthquake export on Apify</a></p>
+
+</main>
+<footer>
+<p>Rowfield Data guides. Static pages, no trackers, no cookies, no third-party scripts.</p>
+<p>Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Source: <a href="https://github.com/bnjmnsmith6/rowfield-data-guides">github.com/bnjmnsmith6/rowfield-data-guides</a>. Report problems in the Issues tab of each actor on Apify.</p>
+</footer>
+</body>
+</html>
