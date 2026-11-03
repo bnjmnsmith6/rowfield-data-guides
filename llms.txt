@@ -1,0 +1,53 @@
+# Rowfield Data guides
+
+> Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, government jobs, bids and tenders data, Federal Register, NVD CVEs, link previews, business listings and earthquakes. Most guides link a tool published by Rowfield Data on the Apify Store; the MCP guide shows how to use those tools from MCP clients through Apify's hosted MCP server.
+
+Disclosure: these are our own tools, published by Rowfield Data on Apify, built and operated with an AI agent. Runs are billed by Apify to your own Apify account at each tool's listed price. The two sitemap paste-in tools run in your browser and upload nothing. Static pages, no trackers, no cookies, no third-party scripts.
+
+- [Index of all guides](https://bnjmnsmith6.github.io/rowfield-data-guides/): Short how-to guides for common data tasks: sitemap to CSV or Excel, company logo from a domain, US state, California, New York and K-12 school jobs data, city and county bids, Federal Register to CSV, EU TED tender exports, NVD CVEs to CSV, SaaSHub alternatives, link previews and Open Graph tags, city and county, Wisconsin, Victoria, Manitoba, Canadian provincial and Latvian public sector jobs, Empire Flippers listings and USGS earthquakes.
+
+## Free browser tools
+
+- [Sitemap to CSV: extract every URL from a sitemap.xml (free paste-in tool)](https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap-to-csv/): Paste a sitemap.xml or sitemap index and get every URL with lastmod as a list and a CSV download. Runs in your browser; nothing is uploaded.
+- [Sitemap to Excel: convert an XML sitemap to a spreadsheet (free paste-in tool)](https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap-to-excel/): Convert a sitemap.xml to Excel: paste the XML, get every URL with lastmod, changefreq and priority as a CSV file Excel opens directly. Runs in your browser; nothing is uploaded.
+
+## Government jobs data
+
+- [US state government jobs feed: California, New York, Wisconsin, North Dakota](https://bnjmnsmith6.github.io/rowfield-data-guides/state-government-jobs-feed/): Export public state government job postings from California, New York, Wisconsin and North Dakota as one dataset: one row shape, CSV/JSON/Excel/API, daily only-new mode.
+- [California state jobs data export: CalCareers postings as CSV, Excel or API](https://bnjmnsmith6.github.io/rowfield-data-guides/california-state-jobs-feed/): Export California state government job postings from CalCareers in bulk: title, classification, department, location, telework, salary, dates, link. CSV, Excel, JSON or API.
+- [New York State job alerts: a daily feed of new StateJobsNY vacancies](https://bnjmnsmith6.github.io/rowfield-data-guides/new-york-state-job-alerts/): Get only the new New York State government vacancies from StateJobsNY each day, filtered by title, agency, county or deadline, as CSV, Excel, JSON or API rows.
+- [Wisconsin state jobs feed: wisc.jobs listings as CSV or JSON](https://bnjmnsmith6.github.io/rowfield-data-guides/wisconsin-state-jobs-feed/): Wisconsin state government job listings from the public wisc.jobs list as rows: title, agency, job class, category, location, posted and closing date, link. Daily only-new mode.
+- [K-12 teacher and school district job postings data: AppliTrack jobs from 50 districts as CSV](https://bnjmnsmith6.github.io/rowfield-data-guides/k12-teacher-jobs-data/): Teacher, substitute, aide and other K-12 school job postings from 50 AppliTrack district portals in 36 states as one CSV, Excel or API feed. Same columns for every district, daily only-new mode.
+- [City and county government jobs from CivicPlus sites as one CSV](https://bnjmnsmith6.github.io/rowfield-data-guides/city-county-government-jobs-civicplus/): Current job postings from the public Jobs pages of many CivicPlus city and county websites in one export: agency, state, title, department, posted and closing dates, salary when shown, link.
+- [Canada provincial government jobs: Manitoba, New Brunswick and Newfoundland and Labrador in one export](https://bnjmnsmith6.github.io/rowfield-data-guides/canada-provincial-government-jobs/): Provincial government job postings from Manitoba, New Brunswick and Newfoundland and Labrador in one row shape: province, title, department, location, salary when shown, dates and link. Daily only-new mode.
+- [Manitoba government jobs feed: new postings as CSV or JSON](https://bnjmnsmith6.github.io/rowfield-data-guides/manitoba-government-jobs-feed/): Manitoba (Canada) government job postings from the public job site feed as rows: title, department, classification, job type, salary, location, posted and closing dates, link. Daily only-new mode.
+- [Victoria government jobs data: Careers Vic listings as CSV or JSON](https://bnjmnsmith6.github.io/rowfield-data-guides/victoria-government-jobs-careers-vic/): Export Victorian Government job listings from the public Careers Vic job board as CSV, JSON, Excel or API rows: title, organisation, work type, salary, grade, location, closing date and link.
+- [Latvia public sector vacancies (NVA vakances) as CSV or JSON](https://bnjmnsmith6.github.io/rowfield-data-guides/latvia-public-sector-vacancies/): Current Latvian state and municipal vacancies from the NVA open data set (CC0) as rows: title, category, employer name, salary range, workload, address, deadline and link. Daily only-new mode.
+
+## Bids, tenders and regulations
+
+- [City and county bids and RFPs: export CivicPlus Bid Postings to CSV](https://bnjmnsmith6.github.io/rowfield-data-guides/city-county-bids-civicplus/): Open bids, RFPs and RFQs from the Bid Postings (Bids.aspx) pages of many CivicPlus city and county websites in one CSV, Excel, JSON or API feed: agency, state, bid number, title, deadline, link.
+- [EU tenders: TED data export to CSV, JSON or Excel](https://bnjmnsmith6.github.io/rowfield-data-guides/eu-tenders-ted-export/): Export new EU calls for tender from TED (Tenders Electronic Daily): notice number, title, buyer, country, CPV codes, publication date, links. Country and CPV filters, daily only-new mode.
+- [Federal Register API to CSV: new rules, notices and comment deadlines as rows](https://bnjmnsmith6.github.io/rowfield-data-guides/federal-register-api-to-csv/): Export new US Federal Register documents from the FederalRegister.gov API to CSV, JSON or Excel: rules, proposed rules, notices, agencies, dockets, CFR parts, comment deadlines.
+
+## Web, security and other data
+
+- [Clearbit Logo API alternative: get a company logo from a domain](https://bnjmnsmith6.github.io/rowfield-data-guides/clearbit-logo-api-alternative/): Get a company logo from a domain in bulk: best logo URL, square icon, favicons and app icons, site name and theme color. No API key from a logo vendor.
+- [Link preview API: get title, description and og:image for a list of URLs](https://bnjmnsmith6.github.io/rowfield-data-guides/link-preview-api/): How to get link previews (title, description, og:image, Open Graph and Twitter card tags, favicon) for a list of URLs. Free options first: read the tags yourself or use a free API tier. Then a pay-per-preview tool where failed URLs are free.
+- [Sitemap extractors on Apify compared: price per 1,000 URLs (checked 2026-11-02)](https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap-extractors-compared/): Five Apify actors that extract every URL from a website's sitemaps, compared by price per 1,000 URLs, input and features. Prices read from the Apify Store on 2026-11-02. Free options first.
+- [NVD CVEs to CSV: CVSS scores, CWE and the CISA KEV flag in one row per CVE](https://bnjmnsmith6.github.io/rowfield-data-guides/nvd-cve-to-csv/): Export new or updated CVEs from the NIST NVD API 2.0 to CSV, Excel, JSON or API rows: CVSS 4.0/3.1/2.0 scores and severity, CWE ids, CISA KEV flag, affected products, advisory links.
+- [SaaSHub alternatives export: software competitor lists as CSV rows](https://bnjmnsmith6.github.io/rowfield-data-guides/saashub-alternatives-export/): Export the ranked SaaSHub alternatives list for each product you name: rank, alternative, votes, product rating and the CC BY-SA 4.0 attribution fields on every row. CSV, Excel, JSON or API.
+- [Empire Flippers listings export: online businesses for sale as CSV or JSON](https://bnjmnsmith6.github.io/rowfield-data-guides/empire-flippers-listings-export/): Export Empire Flippers marketplace listings as rows: asking price, annual and monthly multiple, net profit, revenue, niches, monetization, listing dates and link. For sale or sold. Daily only-new mode.
+- [USGS earthquake data to CSV: magnitude, place, depth and alerts per event](https://bnjmnsmith6.github.io/rowfield-data-guides/usgs-earthquake-data-to-csv/): Export earthquakes from the public USGS earthquake catalog to CSV, JSON, Excel or API rows: time, magnitude, place, coordinates, depth, PAGER alert, tsunami flag. Filter by date, magnitude, radius or box.
+
+## AI agents (MCP)
+
+- [Rowfield Data MCP server: use our 20 data tools from Claude Desktop, Cursor and other AI agents](https://bnjmnsmith6.github.io/rowfield-data-guides/mcp-server-for-ai-agents/): Connect the Rowfield Data MCP server (io.github.bnjmnsmith6/rowfield-data-mcp in the official MCP Registry) to an MCP client: one remote URL on Apify's hosted MCP server, OAuth or Bearer token, or local stdio. Government jobs, bids and tenders, sitemaps, logos, CVEs and more.
+- [rowfield-data-mcp on GitHub](https://github.com/bnjmnsmith6/rowfield-data-mcp): Ready-made MCP client configs (OAuth, Bearer token, local stdio), server.json and the full tool list. No server code; the tools run on Apify's hosted MCP server.
+- [Official MCP Registry entry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.bnjmnsmith6/rowfield-data-mcp): io.github.bnjmnsmith6/rowfield-data-mcp, title "Rowfield Data", remote type streamable-http.
+
+## Optional
+
+- [Rowfield Data on the Apify Store](https://apify.com/founder-experiment): Rowfield Data publisher profile with all public tools. Report problems in the Issues tab of each actor on Apify.
+- [Sitemap](https://bnjmnsmith6.github.io/rowfield-data-guides/sitemap.xml): XML sitemap of all 24 guide URLs.
+- [Site source](https://github.com/bnjmnsmith6/rowfield-data-guides): GitHub repo for these static pages.
