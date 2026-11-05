@@ -204,6 +204,9 @@ async function main() {
     assert(initial.review === null, "review link should start without an href");
     assert(initial.reviewDisabled === "true", "review link should start disabled");
     assert(initial.join === config.responderUrl, "join link mismatch");
+    assert(initial.join === "https://docs.google.com/forms/d/e/1FAIpQLSemQaalQ9ghaCQBVQFiJEhNLUEKsBa6YcYudIYlBLE8c1_CXA/viewform", "join link is not the clean viewform URL");
+    assert(!initial.join.includes("publish-editor"), "join link uses publish-editor");
+    assert(!initial.join.includes("?"), "join link has a query string");
     assert(initial.storage === 0, "browser storage was written");
     assert(initial.cookieHasEmail === false, "cookie contains an email");
     assert(initial.state === "configured", "page did not accept the form config");
@@ -232,6 +235,9 @@ async function main() {
     assert(selected.total === "SAMPLE total: $105", "selected total " + selected.total);
     assert(selected.summary === "2 sample bills selected.", "summary " + selected.summary);
     assert(selected.review === expectedPair, "prefill mismatch\n" + selected.review + "\n" + expectedPair);
+    assert(!selected.review.includes("publish-editor"), "review link uses publish-editor");
+    assert(selected.review.includes("entry.1405724595=SAMPLE+utility+bill+A:+$40"), "review link dropped sample A");
+    assert(selected.review.includes("entry.1405724595=SAMPLE+utility+bill+B:+$65"), "review link dropped sample B");
     assert(selected.reviewDisabled === null, "review link stayed disabled");
     assert(selected.reviewDetail.includes("Joining does not move money"), "review detail " + selected.reviewDetail);
     assert(selected.banner === initial.banner, "banner changed after selection");

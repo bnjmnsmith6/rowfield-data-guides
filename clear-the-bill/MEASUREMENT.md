@@ -8,7 +8,7 @@ The page is a Rowfield Data research project. Clear the Bill is the working titl
 
 `config.js` holds two public links:
 
-- `responderUrl`: the anyone-with-the-link form. Plain join uses this URL unchanged. It does not prefill a sample.
+- `responderUrl`: the anyone-with-the-link form, the clean public `viewform` URL with no query string. Plain join uses this URL unchanged. It does not prefill a sample. `usp=publish-editor` returns HTTP 403 to anonymous visitors and must not be added.
 - `samplePrefillUrl`: the form UI's prefilled link with all four sample checkboxes checked. The page uses it only to learn checkbox field `entry.1405724595` and the exact option text. A visitor's link is rebuilt with only the samples they selected.
 
 The official embed link, `viewform?embedded=true` on the same form id, is not loaded. The page navigates to the hosted form in a new tab. It does not iframe Google, and it does not POST to `formResponse`. Email and the required no-payment acknowledgement are left blank for the person to complete. This page cannot tell whether a response was stored.
@@ -32,7 +32,7 @@ Ops is adding a role question on the Google Form. The public page says the form 
 
 Exposure and opportunity logging is ops-side. This page does not add an analytics SDK, a cookie, or a third-party script. A page view is not a signup and is not a mock-bundle completion.
 
-There is no editor URL in this folder. Do not add one. The supplied responder link uses `usp=publish-editor` on the public `viewform` address. That is the link visitors get. It is not an editor path.
+There is no editor URL in this folder. Do not add one. Plain join is the clean public `viewform` address with no query string. Do not put `usp=publish-editor` on a visitor link. Prefill links still repeat `entry.1405724595` for the selected SAMPLE options only.
 
 ## What counts
 

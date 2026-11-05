@@ -7,7 +7,7 @@ const logic = require("./bill-logic.js");
 
 const dir = __dirname;
 const FORM_ID = "1FAIpQLSemQaalQ9ghaCQBVQFiJEhNLUEKsBa6YcYudIYlBLE8c1_CXA";
-const RESPONDER = "https://docs.google.com/forms/d/e/" + FORM_ID + "/viewform?usp=publish-editor";
+const RESPONDER = "https://docs.google.com/forms/d/e/" + FORM_ID + "/viewform";
 const PREFILL = "https://docs.google.com/forms/d/e/" + FORM_ID + "/viewform?usp=pp_url"
   + "&entry.1405724595=SAMPLE+utility+bill+A:+$40"
   + "&entry.1405724595=SAMPLE+utility+bill+B:+$65"
@@ -73,6 +73,8 @@ test("sample amounts, sums, empty selection, and reset", function () {
 test("published form config and generated link encoding", function () {
   const config = readConfig();
   assert.equal(config.responderUrl, RESPONDER);
+  assert.equal(config.responderUrl.includes("?"), false);
+  assert.equal(config.responderUrl.includes("publish-editor"), false);
   assert.equal(config.samplePrefillUrl, PREFILL);
   const assessed = logic.assessConfig(config);
   assert.equal(assessed.configured, true);
@@ -210,6 +212,7 @@ test("page shows disclaimers, exact samples, and a disabled bundle link until a 
   assert.ok(html.includes('href="' + RESPONDER + '"'));
   assert.match(html, /id="join-link"[^>]*rel="noopener noreferrer"/);
   assert.equal(html.includes("/edit"), false);
+  assert.equal(html.includes("publish-editor"), false);
   assert.equal(html.includes("formResponse"), false);
   assert.equal(html.includes("embedded=true"), false);
   assert.doesNotMatch(html, /type="(email|password|file|tel|number)"/);
@@ -227,6 +230,7 @@ test("page shows disclaimers, exact samples, and a disabled bundle link until a 
   assert.equal(app.includes("innerHTML"), false);
   assert.equal(app.includes("formResponse"), false);
   assert.equal(configSource.includes("/edit"), false);
+  assert.equal(configSource.includes("publish-editor"), false);
   assert.equal(configSource.includes("formResponse"), false);
   assert.equal(configSource.includes("@"), false);
   assert.ok(css.length > 500);
