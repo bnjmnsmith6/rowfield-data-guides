@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Clear the Bill is a free Rowfield Data research prototype built with AI assistance. It shows invented SAMPLE bills only. No donation, payment, or bill payment happens here, and joining does not move money.">
+<meta name="theme-color" content="#efeae2">
+<title>Clear the Bill — Rowfield Data research project</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#sample-bills">Skip to sample bills</a>
+<p class="banner" id="launch-banner">Free research prototype. SAMPLE bills only. No donation, payment, or bill payment happens here. Joining does not move money. The research form opens in a new tab. This page does not store a signup or a sample bundle.</p>
+<header class="intro">
+<p class="eyebrow">Rowfield Data research project</p>
+<h1>Clear the Bill</h1>
+<p class="lede">Clear the Bill is the working title of this free research prototype. It was built with AI assistance. Choose invented sample bills to see a SAMPLE total, then open the research form if you want to leave an email. Joining does not move money.</p>
+</header>
+<div class="notice" role="note">
+<p>This is a free research prototype, built with AI assistance. Every bill on this page is an invented illustration and is labeled SAMPLE. SAMPLE bills only. There are no real households, patients, accounts, or amounts due.</p>
+<p>No donation, payment, or bill payment happens here. No payments or financial assistance are available today. Joining does not move money. A future service is not guaranteed. No company has been formed for this project.</p>
+</div>
+<main>
+<div class="layout">
+<section>
+<h2 id="sample-bills">Sample bills</h2>
+<p>Four invented bills: two utility and two medical. The words on each bill match the research form. Nothing here is a real bill, and there is no upload.</p>
+<form id="sample-form" action="#sample-bills">
+<fieldset>
+<legend>Invented sample bills</legend>
+<label class="bill">
+<input type="checkbox" name="sample" value="utility-a">
+<span class="bill-text">
+<span class="stamp" aria-hidden="true">SAMPLE</span>
+<span class="bill-title">SAMPLE utility bill A: $40</span>
+<span class="bill-meta">Invented utility illustration. No household, provider, address, or account number is shown.</span>
+</span>
+</label>
+<label class="bill">
+<input type="checkbox" name="sample" value="utility-b">
+<span class="bill-text">
+<span class="stamp" aria-hidden="true">SAMPLE</span>
+<span class="bill-title">SAMPLE utility bill B: $65</span>
+<span class="bill-meta">Invented utility illustration. No household, provider, address, or account number is shown.</span>
+</span>
+</label>
+<label class="bill">
+<input type="checkbox" name="sample" value="medical-c">
+<span class="bill-text">
+<span class="stamp" aria-hidden="true">SAMPLE</span>
+<span class="bill-title">SAMPLE medical bill C: $90</span>
+<span class="bill-meta">Invented medical illustration. No patient, household, provider, diagnosis, or account number is shown.</span>
+</span>
+</label>
+<label class="bill">
+<input type="checkbox" name="sample" value="medical-d">
+<span class="bill-text">
+<span class="stamp" aria-hidden="true">SAMPLE</span>
+<span class="bill-title">SAMPLE medical bill D: $120</span>
+<span class="bill-meta">Invented medical illustration. No patient, household, provider, diagnosis, or account number is shown.</span>
+</span>
+</label>
+</fieldset>
+<button type="button" class="reset" id="reset-selection">Clear sample selection</button>
+</form>
+<h2>Research form</h2>
+<p id="form-status" role="status">A selection on this page is not a signup and is not a completed sample bundle. Those exist only after you submit the research form. Enter your email and the no-payment acknowledgement on that form yourself. This page does not store your email or your selection, and it cannot confirm a response. Free research prototype. SAMPLE bills only. No donation, payment, or bill payment happens here. Joining does not move money.</p>
+<p>What counts is a submitted research form. A waitlist signup is a submitted form with an email address. A completed sample bundle is a submitted form that includes at least one of these sample bills. Checking a box here only prepares a link.</p>
+<h2>Deletion requests</h2>
+<p>To ask for a research response to be deleted, email <a href="mailto:rowfielddata@gmail.com">rowfielddata@gmail.com</a>. This page does not send that email for you.</p>
+</section>
+<aside class="dock" aria-label="Sample total and research form">
+<h2>Sample total</h2>
+<div id="sample-live" aria-live="polite" aria-atomic="true">
+<p id="sample-total" class="total-figure">SAMPLE total: $0</p>
+<p id="selection-summary">No sample bills selected. Select at least one invented sample to prepare a bundle link.</p>
+</div>
+<p class="due-note">Not an amount due. These amounts are invented.</p>
+<p class="money-note" id="money-note">Free research prototype. SAMPLE bills only. No donation, payment, or bill payment happens here. Joining does not move money.</p>
+<p class="role-note" id="role-note">The Google Form will ask your role: whether you want to help pay others' bills, need help with a bill, or other.</p>
+<div class="actions">
+<a class="button" id="review-link" aria-disabled="true" tabindex="-1" aria-describedby="money-note role-note form-status">
+<span class="button-label">Review selected samples on the research form</span>
+<span class="button-state">Select at least one sample first</span>
+</a>
+<a class="button secondary" id="join-link" href="https://docs.google.com/forms/d/e/1FAIpQLSemQaalQ9ghaCQBVQFiJEhNLUEKsBa6YcYudIYlBLE8c1_CXA/viewform" target="_blank" rel="noopener noreferrer" aria-describedby="money-note role-note form-status">
+<span class="button-label">Open the research form without a sample selection</span>
+<span class="button-state">Opens the research form in a new tab with no sample boxes filled in. No donation, payment, or bill payment happens here. Joining does not move money.</span>
+</a>
+</div>
+</aside>
+</div>
+</main>
+<footer>
+<p>Clear the Bill is the working title of this Rowfield Data research project. The page is a prototype built with AI assistance. It is separate from the Rowfield Data product guides.</p>
+<p>No analytics, no cookies, and no third-party scripts are used on this page. The research form is hosted by Google and opens only when you choose a link. No donation, payment, or bill payment happens here. Joining does not move money.</p>
+</footer>
+<noscript>
+<p class="noscript">The running SAMPLE total and the prefilled bundle link need the page script. The research form link still opens the form with no samples filled in. This page does not record a signup. Free research prototype. SAMPLE bills only. No donation, payment, or bill payment happens here. Joining does not move money.</p>
+</noscript>
+<script src="config.js"></script>
+<script src="bill-logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
