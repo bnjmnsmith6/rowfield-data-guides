@@ -217,7 +217,22 @@ footer,
 }
 
 .due-note {
-  margin: 0.55rem 0 0.8rem;
+  margin: 0.55rem 0 0.35rem;
+}
+
+.money-note,
+.role-note {
+  margin: 0.45rem 0 0;
+  font-size: 0.95rem;
+}
+
+.money-note {
+  font-weight: 700;
+  color: #7a3326;
+}
+
+.role-note {
+  margin-bottom: 0.8rem;
 }
 
 .actions {

@@ -178,6 +178,12 @@ async function main() {
           summary: document.getElementById("selection-summary").textContent,
           banner: document.getElementById("launch-banner").textContent,
           status: document.getElementById("form-status").textContent,
+          money: document.getElementById("money-note").textContent,
+          role: document.getElementById("role-note").textContent,
+          joinDetail: document.querySelector("#join-link .button-state").textContent,
+          reviewDetail: document.querySelector("#review-link .button-state").textContent,
+          robots: document.querySelector('meta[name="robots"]').content,
+          frames: document.querySelectorAll("iframe").length,
           review: document.getElementById("review-link").getAttribute("href"),
           reviewDisabled: document.getElementById("review-link").getAttribute("aria-disabled"),
           join: document.getElementById("join-link").getAttribute("href"),
@@ -202,6 +208,18 @@ async function main() {
     assert(initial.cookieHasEmail === false, "cookie contains an email");
     assert(initial.state === "configured", "page did not accept the form config");
     assert(initial.status.includes("not a signup"), "status missing");
+    assert(initial.banner.includes("Free research prototype"), "banner prototype " + initial.banner);
+    assert(initial.banner.includes("SAMPLE bills only"), "banner samples " + initial.banner);
+    assert(initial.banner.includes("No donation, payment, or bill payment happens here"), "banner payment " + initial.banner);
+    assert(initial.banner.includes("Joining does not move money"), "banner money " + initial.banner);
+    assert(initial.money.includes("SAMPLE bills only"), "money note " + initial.money);
+    assert(initial.money.includes("Joining does not move money"), "money note payment " + initial.money);
+    assert(initial.joinDetail.includes("Joining does not move money"), "join detail " + initial.joinDetail);
+    assert(initial.role.includes("help pay others' bills"), "role note " + initial.role);
+    assert(initial.role.includes("need help with a bill"), "role note help " + initial.role);
+    assert(initial.role.includes("or other"), "role note other " + initial.role);
+    assert(initial.robots === "noindex, nofollow", "robots " + initial.robots);
+    assert(initial.frames === 0, "form was iframed");
     assert(initial.scrollWidth <= initial.clientWidth + 1, "desktop overflow " + initial.scrollWidth);
 
     await client.send("Runtime.evaluate", {
@@ -215,6 +233,8 @@ async function main() {
     assert(selected.summary === "2 sample bills selected.", "summary " + selected.summary);
     assert(selected.review === expectedPair, "prefill mismatch\n" + selected.review + "\n" + expectedPair);
     assert(selected.reviewDisabled === null, "review link stayed disabled");
+    assert(selected.reviewDetail.includes("Joining does not move money"), "review detail " + selected.reviewDetail);
+    assert(selected.banner === initial.banner, "banner changed after selection");
     assert(selected.join === config.responderUrl, "join link changed");
     assert(!selected.review.includes("medical"), "unselected medical bill was prefilled");
     assert(selected.storage === 0, "selection was stored in the browser");

@@ -1,6 +1,6 @@
 # Clear the Bill measurement
 
-Status: form links are wired. This is not a launch. The 14-day clock has not started. No response has been submitted by this implementation. Do not promote from this change.
+Status: form links are wired. Founder decision on 2026-11-05: accept the revise pass with minimal clarifications only. This is not a launch. This pull request stays unmerged. The 14-day clock has not started. No response has been submitted by this implementation. Do not promote from this change.
 
 The page is a Rowfield Data research project. Clear the Bill is the working title. The chosen parent name is not formed and is intentionally absent from the public page and from this file. No personal name, address, phone, or birth date belongs here.
 
@@ -24,6 +24,14 @@ The published form also asks for a required email ("Email for the research waitl
 
 A read-only check of the public form, with no submit, showed that the two-bill link checks only SAMPLE utility bill A and SAMPLE utility bill B, leaves the email empty, and leaves the acknowledgement unchecked. The plain responder link does not precheck a sample. No response was submitted.
 
+## Role question
+
+Ops is adding a role question on the Google Form. The public page says the form will ask whether the person wants to help pay others' bills, needs help with a bill, or other. This repository does not edit the form, does not invent a field entry id for that question, and does not iframe the form. Sample links still use only the existing public checkbox entry, `entry.1405724595`.
+
+## Exposure and opportunity
+
+Exposure and opportunity logging is ops-side. This page does not add an analytics SDK, a cookie, or a third-party script. A page view is not a signup and is not a mock-bundle completion.
+
 There is no editor URL in this folder. Do not add one. The supplied responder link uses `usp=publish-editor` on the public `viewform` address. That is the link visitors get. It is not an editor path.
 
 ## What counts
@@ -32,7 +40,7 @@ Count only rows in the private form responses. A click on this page does not cou
 
 - Unique signup: one distinct email after trim and lowercase, excluding internal QA. A repeated email counts once. Skip a response with an empty email.
 - Completed sample bundle: one non-test response with at least one sample checkbox checked. This is a response count, not a unique-email count.
-- Internal QA: any submission made to check the form, including the first end-to-end check. Keep that exclusion list in the private account, not in git.
+- Internal QA: any submission made to check the form, including the first end-to-end check. QA responses must be excluded from the unique signup count and from the completed sample bundle count. Keep that exclusion list in the private account, not in git.
 
 Both counts are unchanged by this repository change because no response was submitted here.
 
@@ -42,6 +50,8 @@ Start the 14 days only after the public page is verified on the live Pages URL a
 
 After those 14 days, park the test if unique non-test signups are fewer than 10, or if completed sample bundles are zero.
 
+Kill rule, unchanged: 14 days from verified public launch. Park if unique non-QA sign-ups are fewer than 10, or if mock-bundle completions are zero. A unique non-QA sign-up is the unique signup count above, after QA responses are excluded. A mock-bundle completion is a completed sample bundle. This pull request does not start the clock.
+
 ## Checks before any launch note
 
 1. Do not merge until the page has been reviewed.
@@ -50,5 +60,6 @@ After those 14 days, park the test if unique non-test signups are fewer than 10,
 4. Open "Review selected samples". Confirm only those boxes are checked, the email field is empty, and the no-payment acknowledgement is unchecked. Close the form without submitting, or submit one QA response and exclude that email.
 5. Open the plain join link. Confirm no sample box is checked. Do not submit unless that response will be marked QA.
 6. Record a launch timestamp only after that private-response check. Then, and not before, the 14-day clock can start.
+7. Ops adds the role question on the Google Form (help pay others' bills, need help with a bill, or other). Do not invent that field's entry id in this repository. QA responses must still be excluded. Exposure and opportunity logging stays ops-side. Do not add an analytics SDK to this page.
 
 Run `node --test clear-the-bill/bill-logic.test.js` from the repository root. The page script does not send email.

@@ -115,6 +115,10 @@ test("published form config and generated link encoding", function () {
   const chosen = logic.linkState(config, ["utility-b"]);
   assert.equal(chosen.review.href, logic.buildBundleUrl(config, ["utility-b"]));
   assert.match(chosen.review.detail, /new tab/);
+  assert.match(chosen.review.detail, /Joining does not move money/);
+  assert.match(chosen.join.detail, /Joining does not move money/);
+  assert.match(empty.join.detail, /No donation, payment, or bill payment happens here/);
+  assert.match(empty.banner, /SAMPLE bills only/);
   assert.equal(chosen.join.href, RESPONDER);
   assert.equal(chosen.status, logic.COPY.configuredStatus);
 });
@@ -127,6 +131,7 @@ test("unconfigured, incomplete, and unsafe form links stay off", function () {
   assert.equal(blank.join.href, null);
   assert.equal(blank.status, logic.COPY.unconfiguredStatus);
   assert.match(blank.banner, /Signups are not being collected/);
+  assert.match(blank.banner, /Joining does not move money/);
 
   const responderOnly = logic.linkState({ responderUrl: RESPONDER, samplePrefillUrl: "  " }, ["utility-a"]);
   assert.equal(responderOnly.configured, false);
@@ -186,9 +191,18 @@ test("page shows disclaimers, exact samples, and a disabled bundle link until a 
     "cannot confirm a response",
     "no-payment acknowledgement",
     logic.COPY.configuredStatus,
-    logic.COPY.configuredBanner
+    logic.COPY.configuredBanner,
+    logic.COPY.freeSample,
+    logic.COPY.noMoney,
+    "The Google Form will ask your role: whether you want to help pay others' bills, need help with a bill, or other."
   ];
   for (const phrase of phrases) assert.ok(html.includes(phrase), phrase);
+  assert.match(html, /name="robots" content="noindex, nofollow"/);
+  assert.equal(html.includes("<iframe"), false);
+  assert.equal(html.includes("StillBriar"), false);
+  assert.equal(html.includes("nonprofit"), false);
+  assert.equal(html.includes("tax deductible"), false);
+  assert.equal(html.includes("beneficiar"), false);
   for (const sample of logic.SAMPLES) assert.ok(html.includes(sample.label), sample.label);
   assert.equal(html.includes("Signups are not being collected"), false);
   assert.match(html, /id="review-link"[^>]*aria-disabled="true"/);
@@ -216,4 +230,19 @@ test("page shows disclaimers, exact samples, and a disabled bundle link until a 
   assert.equal(configSource.includes("formResponse"), false);
   assert.equal(configSource.includes("@"), false);
   assert.ok(css.length > 500);
+
+  const measurement = fs.readFileSync(path.join(dir, "MEASUREMENT.md"), "utf8");
+  assert.match(measurement, /Ops is adding a role question/);
+  assert.match(measurement, /QA responses must be excluded/);
+  assert.match(measurement, /Exposure and opportunity logging is ops-side/);
+  assert.match(measurement, /does not add an analytics SDK/);
+  assert.match(measurement, /14-day clock has not started/);
+  assert.match(measurement, /Kill rule, unchanged/);
+  assert.equal(measurement.includes("/edit"), false);
+  const sources = ["index.html", "app.js", "bill-logic.js", "config.js", "MEASUREMENT.md"].map(function (name) {
+    return fs.readFileSync(path.join(dir, name), "utf8");
+  }).join("\n");
+  assert.deepEqual([...new Set(Array.from(sources.matchAll(/entry\.(\d+)/g), function (match) { return match[1]; }))], [
+    "1405724595"
+  ]);
 });

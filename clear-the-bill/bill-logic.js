@@ -16,13 +16,18 @@
     { id: "medical-d", label: "SAMPLE medical bill D: $120", kind: "medical", cents: 12000 }
   ];
 
+  var FREE_SAMPLE = "Free research prototype. SAMPLE bills only.";
+  var NO_MONEY = "No donation, payment, or bill payment happens here. Joining does not move money.";
+
   var COPY = {
-    unconfiguredBanner: "Signups are not being collected. The research form is not connected.",
-    unconfiguredStatus: "Signups are not being collected. The research form link is not configured, so this page cannot record an email or a sample bundle. A click here is not a signup.",
-    invalidBanner: "Signups are not being collected. The form link is not usable yet.",
-    invalidStatus: "Signups are not being collected. A form link is present but it is not a usable public Google Form link, so nothing is recorded.",
-    configuredBanner: "The research form opens in a new tab. This page does not store a signup or a sample bundle.",
-    configuredStatus: "A selection on this page is not a signup and is not a completed sample bundle. Those exist only after you submit the research form. Enter your email and the no-payment acknowledgement on that form yourself. This page does not store your email or your selection, and it cannot confirm a response."
+    freeSample: FREE_SAMPLE,
+    noMoney: NO_MONEY,
+    unconfiguredBanner: FREE_SAMPLE + " " + NO_MONEY + " Signups are not being collected. The research form is not connected.",
+    unconfiguredStatus: "Signups are not being collected. The research form link is not configured, so this page cannot record an email or a sample bundle. A click here is not a signup. " + FREE_SAMPLE + " " + NO_MONEY,
+    invalidBanner: FREE_SAMPLE + " " + NO_MONEY + " Signups are not being collected. The form link is not usable yet.",
+    invalidStatus: "Signups are not being collected. A form link is present but it is not a usable public Google Form link, so nothing is recorded. " + FREE_SAMPLE + " " + NO_MONEY,
+    configuredBanner: FREE_SAMPLE + " " + NO_MONEY + " The research form opens in a new tab. This page does not store a signup or a sample bundle.",
+    configuredStatus: "A selection on this page is not a signup and is not a completed sample bundle. Those exist only after you submit the research form. Enter your email and the no-payment acknowledgement on that form yourself. This page does not store your email or your selection, and it cannot confirm a response. " + FREE_SAMPLE + " " + NO_MONEY
   };
 
   var VIEWFORM = /^\/forms\/(?:u\/\d+\/)?d\/e\/([A-Za-z0-9_-]+)\/viewform$/;
@@ -233,15 +238,15 @@
       status: COPY.configuredStatus,
       total: formatTotal(selected),
       summary: formatSummary(selected, true),
-      review: {
+        review: {
         href: bundle,
         detail: bundle
-          ? "Opens the research form in a new tab with the selected samples filled in for you to review and submit"
+          ? "Opens the research form in a new tab with the selected samples filled in for you to review and submit. " + NO_MONEY
           : "Select at least one sample first"
       },
       join: {
         href: buildJoinUrl(config),
-        detail: "Opens the research form in a new tab with no sample boxes filled in"
+        detail: "Opens the research form in a new tab with no sample boxes filled in. " + NO_MONEY
       }
     };
   }
